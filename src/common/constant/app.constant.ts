@@ -1,0 +1,27 @@
+import 'dotenv/config'
+
+export const PORT = process.env.PORT;
+export const DATABASE_URL = process.env.DATABASE_URL;
+export const DATABASE_REDIS = process.env.DATABASE_REDIS;
+
+export const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
+export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET
+
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+export const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
+export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+
+export const FOLDER_IMAGE = "public/images"
+
+console.log("\n", {
+    PORT: PORT,
+    DATABASE_URL: DATABASE_URL,
+    DATABASE_REDIS: DATABASE_REDIS,
+    ACCESS_TOKEN_SECRET: ACCESS_TOKEN_SECRET,
+    REFRESH_TOKEN_SECRET: REFRESH_TOKEN_SECRET,
+    GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET
+}, "\n");

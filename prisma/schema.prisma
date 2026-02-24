@@ -1,0 +1,120 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/modules-system/prisma/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Banners {
+  bannerId    Int      @id @default(autoincrement())
+  movieId     Int
+  bannerImage String   @db.VarChar(255)
+  isDeleted   Boolean  @default(false)
+  createAt    DateTime @default(now()) @db.Timestamp(0)
+  updateAt    DateTime @default(now()) @db.Timestamp(0)
+  Movies      Movies   @relation(fields: [movieId], references: [movieId], onDelete: NoAction, onUpdate: NoAction, map: "FK_movieId")
+
+  @@index([movieId], map: "FK_movieId")
+}
+
+model Booking {
+  bookingId Int      @id @default(autoincrement())
+  userId    Int
+  showId    Int
+  seatId    Int
+  createAt  DateTime @default(now()) @db.Timestamp(0)
+  Seats     Seats    @relation(fields: [seatId], references: [seatId], onDelete: NoAction, onUpdate: NoAction, map: "FK_seatId")
+  Showtime  Showtime @relation(fields: [showId], references: [showId], onDelete: NoAction, onUpdate: NoAction, map: "FK_showId")
+  Users     Users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_userId")
+
+  @@unique([showId, seatId], map: "showId")
+  @@index([seatId], map: "FK_seatId")
+  @@index([userId], map: "FK_userId")
+}
+
+model Brands {
+  brandId   Int       @id @default(autoincrement())
+  brandName String?   @db.VarChar(255)
+  brandLogo String?   @db.VarChar(255)
+  Cinemas   Cinemas[]
+}
+
+model Cinemas {
+  cinemaId      Int       @id @default(autoincrement())
+  cinemaName    String?   @db.VarChar(255)
+  cinemaAddress String?   @db.VarChar(255)
+  brandId       Int?
+  Brands        Brands?   @relation(fields: [brandId], references: [brandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_brandId")
+  Screens       Screens[]
+
+  @@index([brandId], map: "FK_brandId")
+}
+
+model Movies {
+  movieId          Int       @id @default(autoincrement())
+  movieName        String    @db.VarChar(255)
+  movieTrailer     String    @db.VarChar(255)
+  movieImage       String?   @db.VarChar(255)
+  movieDescription String    @db.Text
+  dateRelease      DateTime  @db.DateTime(0)
+  movieRating      Int?
+  isTrending       Boolean
+  isShowing        Boolean
+  isUpcoming       Boolean
+  isDeleted        Boolean   @default(false)
+  createAt         DateTime  @default(now()) @db.Timestamp(0)
+  updateAt         DateTime  @default(now()) @db.Timestamp(0)
+  Banners          Banners[]
+}
+
+model Screens {
+  screenId   Int      @id @default(autoincrement())
+  screenName String   @db.VarChar(255)
+  cinemaId   Int
+  isDeleted  Boolean  @default(false)
+  createAt   DateTime @default(now()) @db.Timestamp(0)
+  updateAt   DateTime @default(now()) @db.Timestamp(0)
+  Cinemas    Cinemas  @relation(fields: [cinemaId], references: [cinemaId], onDelete: NoAction, onUpdate: NoAction, map: "FK_cinemaId")
+  Seats      Seats[]
+
+  @@index([cinemaId], map: "FK_cinemaId")
+}
+
+model Seats {
+  seatId   Int       @id @default(autoincrement())
+  seatName String    @db.Char(3)
+  seatType String    @db.VarChar(255)
+  screenId Int
+  Booking  Booking[]
+  Screens  Screens   @relation(fields: [screenId], references: [screenId], onDelete: NoAction, onUpdate: NoAction, map: "FK_screenId")
+
+  @@index([screenId], map: "FK_screenId")
+}
+
+model Showtime {
+  showId       Int       @id @default(autoincrement())
+  screenId     Int
+  movieId      Int
+  showTime     DateTime  @db.DateTime(0)
+  bookingPrice Int
+  isDeleted    Boolean   @default(false)
+  createAt     DateTime  @default(now()) @db.Timestamp(0)
+  updateAt     DateTime  @default(now()) @db.Timestamp(0)
+  Booking      Booking[]
+}
+
+model Users {
+  userId       Int       @id @default(autoincrement())
+  userFullname String    @db.VarChar(255)
+  userEmail    String    @db.VarChar(255)
+  userPhone    String?   @db.VarChar(255)
+  userPassword String    @db.VarChar(255)
+  userType     String    @db.VarChar(255)
+  isDeleted    Boolean   @default(false)
+  createAt     DateTime  @default(now()) @db.Timestamp(0)
+  updateAt     DateTime  @default(now()) @db.Timestamp(0)
+  Booking      Booking[]
+}
