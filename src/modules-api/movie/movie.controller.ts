@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common'
 import { MovieService } from './movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { AddBannerDto } from './dto/add-banner.dto';
 
 @Controller('movie')
 export class MovieController {
@@ -45,14 +46,37 @@ export class MovieController {
   }
 
   // DELETE Delete Movie
-  // GET Movie Banners
-  // POST Add Movie banner
-  // DELETE Movie Banner
-
-
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.movieService.remove(+id);
+  removeMovie(@Param('id') id: string) {
+    return this.movieService.removeMovie(+id);
+  }
+
+  // GET Movie Banners
+  @Get(':id/banners')
+  getMovieBanners(
+    @Param('id')
+    id: string
+  ) {
+    return this.movieService.getMovieBanners(+id);
+  }
+
+  // POST Add Movie banner
+  @Post(':id/add-banner')
+  addMovieBanner(
+    @Param('id')
+    id: string,
+    @Body()
+    addBannerDto: AddBannerDto
+  ) {
+    return this.movieService.addMovieBanner(+id, addBannerDto)
+  }
+
+  // DELETE Movie Banner
+  @Delete('banner/:bannerId')
+  removeMovieBanner(
+    @Param('bannerId')
+    bannerId: string,
+  ) {
+    return this.movieService.removeMovieBanner(+bannerId)
   }
 }

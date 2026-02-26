@@ -1,4 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateCinemaDto } from './create-cinema.dto';
 
-export class UpdateCinemaDto extends PartialType(CreateCinemaDto) {}
+export class UpdateCinemaDto extends PartialType(CreateCinemaDto) {
+    cinemaName: string;
+    cinemaAddress: string;
+    brandId: number
+}

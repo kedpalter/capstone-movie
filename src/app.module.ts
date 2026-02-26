@@ -8,11 +8,13 @@ import { BookingModule } from './modules-api/booking/booking.module';
 import { AuthModule } from './modules-api/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './modules-system/prisma/prisma.module';
+import { CheckExistModule } from './modules-system/checkExist/checkExist.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     PrismaModule,
+    CheckExistModule,
     MovieModule,
     CinemaModule,
     UserModule,

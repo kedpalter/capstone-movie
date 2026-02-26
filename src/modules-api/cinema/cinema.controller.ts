@@ -1,34 +1,117 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query } from '@nestjs/common';
 import { CinemaService } from './cinema.service';
 import { CreateCinemaDto } from './dto/create-cinema.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
+import { CreateScreenDto } from './dto/create-screen.dto';
+import { CreateSeatDto } from './dto/create-seat.dto';
+import { CreateShowtimeDto } from './dto/create-showtime.dto';
+import { UpdateShowtimeDto } from './dto/update-showtime.dto';
 
 @Controller('cinema')
 export class CinemaController {
-  constructor(private readonly cinemaService: CinemaService) {}
+  constructor(private readonly cinemaService: CinemaService) { }
 
-  @Post()
-  create(@Body() createCinemaDto: CreateCinemaDto) {
-    return this.cinemaService.create(createCinemaDto);
+  // GET Brands
+  @Get('all-brands')
+  findAllBrands() {
+    return this.cinemaService.findAllBrands();
   }
 
-  @Get()
-  findAll() {
-    return this.cinemaService.findAll();
+  // GET Brand Detail
+  @Get('brand')
+  getBrandDetail(@Query('name') name: string) {
+    return this.cinemaService.getBrandDetail(name);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cinemaService.findOne(+id);
+  // GET Cinemas
+  @Get('all-cinemas')
+  findAllCinemas() {
+    return this.cinemaService.findAllCinemas();
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCinemaDto: UpdateCinemaDto) {
-    return this.cinemaService.update(+id, updateCinemaDto);
+  // GET Cinema detail
+  // @Get(':cinemaId')
+  // findCinemaDetail(@Param('cinemaId') cinemaId: string) {
+  //   return this.cinemaService.findCinemaDetail(+cinemaId)
+  // }
+
+  // POST Add Cinema
+  @Post('add-cinema')
+  addCinema(@Body() createCinemaDto: CreateCinemaDto) {
+    return this.cinemaService.addCinema(createCinemaDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cinemaService.remove(+id);
+  // PUT Edit Cinema
+  @Put(':id')
+  updateCinema(
+    @Param('id')
+    id: string,
+    @Body()
+    updateCinemaDto: UpdateCinemaDto
+  ) {
+    return this.cinemaService.updateCinema(+id, updateCinemaDto);
+  }
+
+  // POST Add Screen
+  @Post('add-screen')
+  addScreen(
+    @Query('cinemaId')
+    cinemaId: string,
+    @Body()
+    createSceenDto: CreateScreenDto
+  ) {
+    return this.cinemaService.addScreen(+cinemaId, createSceenDto)
+  }
+
+  // GET Seat list
+  @Get(':id/seat-list')
+  getSeats(
+    @Param('id')
+    cinemaId: string,
+    @Query('screenId')
+    screenId: string
+  ) {
+    return this.cinemaService.getSeats(+cinemaId, +screenId)
+  }
+
+  // POST Add Seat
+  @Post(':id/add-seat')
+  addSeat(
+    @Param('id')
+    cinemaId: string,
+    @Query('screenId')
+    screenId: string,
+    @Body()
+    addSeatDto: CreateSeatDto
+  ) {
+    return this.cinemaService.addSeat(+cinemaId, +screenId, addSeatDto)
+  }
+
+  // GET Showtime
+  @Get('show-time')
+  getShowtime(
+    @Query('screenId')
+    screenId: string
+  ) {
+    return this.cinemaService.getShowtime(+screenId)
+  }
+
+  // POST Add Showtime
+  @Post('add-showtime')
+  addShowtime(
+    @Body()
+    addShowtimeDto: CreateShowtimeDto
+  ) {
+    return this.cinemaService.addShowtime(addShowtimeDto)
+  }
+
+  @Put('edit-showtime')
+  updateShowtime(
+    @Query('showtimeId')
+    showtimeId: string,
+    @Body()
+    updateShowtimeDto: UpdateShowtimeDto
+  ) {
+    return this.cinemaService.updateShowtime(+showtimeId, updateShowtimeDto)
   }
 }
