@@ -118,7 +118,7 @@ model Showtime {
 model Users {
   userId       Int       @id @default(autoincrement())
   userFullname String    @db.VarChar(255)
-  userEmail    String    @db.VarChar(255)
+  userEmail    String    @unique(map: "userEmail") @db.VarChar(255)
   userPhone    String?   @db.VarChar(255)
   userPassword String    @db.VarChar(255)
   userType     String    @db.VarChar(255)

@@ -72,7 +72,7 @@ CREATE TABLE
     IF NOT EXISTS `Users` (
         `userId` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         `userFullname` VARCHAR(255) NOT NULL,
-        `userEmail` VARCHAR(255) NOT NULL,
+        `userEmail` VARCHAR(255) NOT NULL UNIQUE,
         `userPhone` VARCHAR(255),
         `userPassword` VARCHAR(255) NOT NULL,
         `userType` VARCHAR(255) NOT NULL,
