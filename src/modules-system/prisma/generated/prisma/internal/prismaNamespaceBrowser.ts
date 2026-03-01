@@ -104,10 +104,7 @@ export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeo
 export const BrandsScalarFieldEnum = {
   brandId: 'brandId',
   brandName: 'brandName',
-  brandLogo: 'brandLogo',
-  isDeleted: 'isDeleted',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
+  brandLogo: 'brandLogo'
 } as const
 
 export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof BrandsScalarFieldEnum]
@@ -117,10 +114,7 @@ export const CinemasScalarFieldEnum = {
   cinemaId: 'cinemaId',
   cinemaName: 'cinemaName',
   cinemaAddress: 'cinemaAddress',
-  brandId: 'brandId',
-  isDeleted: 'isDeleted',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
+  brandId: 'brandId'
 } as const
 
 export type CinemasScalarFieldEnum = (typeof CinemasScalarFieldEnum)[keyof typeof CinemasScalarFieldEnum]
@@ -161,10 +155,7 @@ export const SeatsScalarFieldEnum = {
   seatId: 'seatId',
   seatName: 'seatName',
   seatType: 'seatType',
-  screenId: 'screenId',
-  isDeleted: 'isDeleted',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
+  screenId: 'screenId'
 } as const
 
 export type SeatsScalarFieldEnum = (typeof SeatsScalarFieldEnum)[keyof typeof SeatsScalarFieldEnum]

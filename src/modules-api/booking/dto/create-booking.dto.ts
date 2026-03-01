@@ -1,1 +1,5 @@
-export class CreateBookingDto {}
+export class CreateBookingDto {
+    userId: number;
+    showId: number;
+    seatId: number;
+}

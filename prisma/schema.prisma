@@ -39,9 +39,6 @@ model Brands {
   brandId   Int       @id @default(autoincrement())
   brandName String?   @db.VarChar(255)
   brandLogo String?   @db.VarChar(255)
-  isDeleted Boolean   @default(false)
-  createAt  DateTime  @default(now()) @db.Timestamp(0)
-  updateAt  DateTime  @default(now()) @db.Timestamp(0)
   Cinemas   Cinemas[]
 }
 
@@ -50,9 +47,6 @@ model Cinemas {
   cinemaName    String?   @db.VarChar(255)
   cinemaAddress String?   @db.VarChar(255)
   brandId       Int?
-  isDeleted     Boolean   @default(false)
-  createAt      DateTime  @default(now()) @db.Timestamp(0)
-  updateAt      DateTime  @default(now()) @db.Timestamp(0)
   Brands        Brands?   @relation(fields: [brandId], references: [brandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_brandId")
   Screens       Screens[]
 
@@ -90,15 +84,12 @@ model Screens {
 }
 
 model Seats {
-  seatId    Int       @id @default(autoincrement())
-  seatName  String    @db.Char(3)
-  seatType  String    @db.VarChar(255)
-  screenId  Int
-  isDeleted Boolean   @default(false)
-  createAt  DateTime  @default(now()) @db.Timestamp(0)
-  updateAt  DateTime  @default(now()) @db.Timestamp(0)
-  Booking   Booking[]
-  Screens   Screens   @relation(fields: [screenId], references: [screenId], onDelete: NoAction, onUpdate: NoAction, map: "FK_screenId")
+  seatId   Int       @id @default(autoincrement())
+  seatName String    @db.Char(3)
+  seatType String    @db.VarChar(255)
+  screenId Int
+  Booking  Booking[]
+  Screens  Screens   @relation(fields: [screenId], references: [screenId], onDelete: NoAction, onUpdate: NoAction, map: "FK_screenId")
 
   @@index([screenId], map: "FK_screenId")
 }

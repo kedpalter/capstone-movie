@@ -9,6 +9,7 @@ import { CreateSeatDto } from './dto/create-seat.dto';
 import { CreateShowtimeDto } from './dto/create-showtime.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
 import { UpdateShowtimeDto } from './dto/update-showtime.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('cinema')
 export class CinemaController {
@@ -16,19 +17,21 @@ export class CinemaController {
 
   // GET Brands
   @UseGuards(ProtectGuard, RoleGuard)
-  @Role('user')
+  @Public()
   @Get('all-brands')
   findAllBrands() {
     return this.cinemaService.findAllBrands();
   }
 
   // GET Brand Detail
+  @Public()
   @Get('brand')
   getBrandDetail(@Query('name') name: string) {
     return this.cinemaService.getBrandDetail(name);
   }
 
   // GET Cinemas
+  @Public()
   @Get('all-cinemas')
   findAllCinemas() {
     return this.cinemaService.findAllCinemas();

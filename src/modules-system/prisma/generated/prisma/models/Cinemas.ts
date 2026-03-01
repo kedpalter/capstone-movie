@@ -41,9 +41,6 @@ export type CinemasMinAggregateOutputType = {
   cinemaName: string | null
   cinemaAddress: string | null
   brandId: number | null
-  isDeleted: boolean | null
-  createAt: Date | null
-  updateAt: Date | null
 }
 
 export type CinemasMaxAggregateOutputType = {
@@ -51,9 +48,6 @@ export type CinemasMaxAggregateOutputType = {
   cinemaName: string | null
   cinemaAddress: string | null
   brandId: number | null
-  isDeleted: boolean | null
-  createAt: Date | null
-  updateAt: Date | null
 }
 
 export type CinemasCountAggregateOutputType = {
@@ -61,9 +55,6 @@ export type CinemasCountAggregateOutputType = {
   cinemaName: number
   cinemaAddress: number
   brandId: number
-  isDeleted: number
-  createAt: number
-  updateAt: number
   _all: number
 }
 
@@ -83,9 +74,6 @@ export type CinemasMinAggregateInputType = {
   cinemaName?: true
   cinemaAddress?: true
   brandId?: true
-  isDeleted?: true
-  createAt?: true
-  updateAt?: true
 }
 
 export type CinemasMaxAggregateInputType = {
@@ -93,9 +81,6 @@ export type CinemasMaxAggregateInputType = {
   cinemaName?: true
   cinemaAddress?: true
   brandId?: true
-  isDeleted?: true
-  createAt?: true
-  updateAt?: true
 }
 
 export type CinemasCountAggregateInputType = {
@@ -103,9 +88,6 @@ export type CinemasCountAggregateInputType = {
   cinemaName?: true
   cinemaAddress?: true
   brandId?: true
-  isDeleted?: true
-  createAt?: true
-  updateAt?: true
   _all?: true
 }
 
@@ -200,9 +182,6 @@ export type CinemasGroupByOutputType = {
   cinemaName: string | null
   cinemaAddress: string | null
   brandId: number | null
-  isDeleted: boolean
-  createAt: Date
-  updateAt: Date
   _count: CinemasCountAggregateOutputType | null
   _avg: CinemasAvgAggregateOutputType | null
   _sum: CinemasSumAggregateOutputType | null
@@ -233,9 +212,6 @@ export type CinemasWhereInput = {
   cinemaName?: Prisma.StringNullableFilter<"Cinemas"> | string | null
   cinemaAddress?: Prisma.StringNullableFilter<"Cinemas"> | string | null
   brandId?: Prisma.IntNullableFilter<"Cinemas"> | number | null
-  isDeleted?: Prisma.BoolFilter<"Cinemas"> | boolean
-  createAt?: Prisma.DateTimeFilter<"Cinemas"> | Date | string
-  updateAt?: Prisma.DateTimeFilter<"Cinemas"> | Date | string
   Brands?: Prisma.XOR<Prisma.BrandsNullableScalarRelationFilter, Prisma.BrandsWhereInput> | null
   Screens?: Prisma.ScreensListRelationFilter
 }
@@ -245,9 +221,6 @@ export type CinemasOrderByWithRelationInput = {
   cinemaName?: Prisma.SortOrderInput | Prisma.SortOrder
   cinemaAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   brandId?: Prisma.SortOrderInput | Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
   Brands?: Prisma.BrandsOrderByWithRelationInput
   Screens?: Prisma.ScreensOrderByRelationAggregateInput
   _relevance?: Prisma.CinemasOrderByRelevanceInput
@@ -261,9 +234,6 @@ export type CinemasWhereUniqueInput = Prisma.AtLeast<{
   cinemaName?: Prisma.StringNullableFilter<"Cinemas"> | string | null
   cinemaAddress?: Prisma.StringNullableFilter<"Cinemas"> | string | null
   brandId?: Prisma.IntNullableFilter<"Cinemas"> | number | null
-  isDeleted?: Prisma.BoolFilter<"Cinemas"> | boolean
-  createAt?: Prisma.DateTimeFilter<"Cinemas"> | Date | string
-  updateAt?: Prisma.DateTimeFilter<"Cinemas"> | Date | string
   Brands?: Prisma.XOR<Prisma.BrandsNullableScalarRelationFilter, Prisma.BrandsWhereInput> | null
   Screens?: Prisma.ScreensListRelationFilter
 }, "cinemaId">
@@ -273,9 +243,6 @@ export type CinemasOrderByWithAggregationInput = {
   cinemaName?: Prisma.SortOrderInput | Prisma.SortOrder
   cinemaAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   brandId?: Prisma.SortOrderInput | Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
   _count?: Prisma.CinemasCountOrderByAggregateInput
   _avg?: Prisma.CinemasAvgOrderByAggregateInput
   _max?: Prisma.CinemasMaxOrderByAggregateInput
@@ -291,17 +258,11 @@ export type CinemasScalarWhereWithAggregatesInput = {
   cinemaName?: Prisma.StringNullableWithAggregatesFilter<"Cinemas"> | string | null
   cinemaAddress?: Prisma.StringNullableWithAggregatesFilter<"Cinemas"> | string | null
   brandId?: Prisma.IntNullableWithAggregatesFilter<"Cinemas"> | number | null
-  isDeleted?: Prisma.BoolWithAggregatesFilter<"Cinemas"> | boolean
-  createAt?: Prisma.DateTimeWithAggregatesFilter<"Cinemas"> | Date | string
-  updateAt?: Prisma.DateTimeWithAggregatesFilter<"Cinemas"> | Date | string
 }
 
 export type CinemasCreateInput = {
   cinemaName?: string | null
   cinemaAddress?: string | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
   Brands?: Prisma.BrandsCreateNestedOneWithoutCinemasInput
   Screens?: Prisma.ScreensCreateNestedManyWithoutCinemasInput
 }
@@ -311,18 +272,12 @@ export type CinemasUncheckedCreateInput = {
   cinemaName?: string | null
   cinemaAddress?: string | null
   brandId?: number | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
   Screens?: Prisma.ScreensUncheckedCreateNestedManyWithoutCinemasInput
 }
 
 export type CinemasUpdateInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Brands?: Prisma.BrandsUpdateOneWithoutCinemasNestedInput
   Screens?: Prisma.ScreensUpdateManyWithoutCinemasNestedInput
 }
@@ -332,9 +287,6 @@ export type CinemasUncheckedUpdateInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brandId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Screens?: Prisma.ScreensUncheckedUpdateManyWithoutCinemasNestedInput
 }
 
@@ -343,17 +295,11 @@ export type CinemasCreateManyInput = {
   cinemaName?: string | null
   cinemaAddress?: string | null
   brandId?: number | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
 }
 
 export type CinemasUpdateManyMutationInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CinemasUncheckedUpdateManyInput = {
@@ -361,9 +307,6 @@ export type CinemasUncheckedUpdateManyInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brandId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CinemasListRelationFilter = {
@@ -387,9 +330,6 @@ export type CinemasCountOrderByAggregateInput = {
   cinemaName?: Prisma.SortOrder
   cinemaAddress?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
 }
 
 export type CinemasAvgOrderByAggregateInput = {
@@ -402,9 +342,6 @@ export type CinemasMaxOrderByAggregateInput = {
   cinemaName?: Prisma.SortOrder
   cinemaAddress?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
 }
 
 export type CinemasMinOrderByAggregateInput = {
@@ -412,9 +349,6 @@ export type CinemasMinOrderByAggregateInput = {
   cinemaName?: Prisma.SortOrder
   cinemaAddress?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
 }
 
 export type CinemasSumOrderByAggregateInput = {
@@ -494,9 +428,6 @@ export type CinemasUpdateOneRequiredWithoutScreensNestedInput = {
 export type CinemasCreateWithoutBrandsInput = {
   cinemaName?: string | null
   cinemaAddress?: string | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
   Screens?: Prisma.ScreensCreateNestedManyWithoutCinemasInput
 }
 
@@ -504,9 +435,6 @@ export type CinemasUncheckedCreateWithoutBrandsInput = {
   cinemaId?: number
   cinemaName?: string | null
   cinemaAddress?: string | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
   Screens?: Prisma.ScreensUncheckedCreateNestedManyWithoutCinemasInput
 }
 
@@ -544,17 +472,11 @@ export type CinemasScalarWhereInput = {
   cinemaName?: Prisma.StringNullableFilter<"Cinemas"> | string | null
   cinemaAddress?: Prisma.StringNullableFilter<"Cinemas"> | string | null
   brandId?: Prisma.IntNullableFilter<"Cinemas"> | number | null
-  isDeleted?: Prisma.BoolFilter<"Cinemas"> | boolean
-  createAt?: Prisma.DateTimeFilter<"Cinemas"> | Date | string
-  updateAt?: Prisma.DateTimeFilter<"Cinemas"> | Date | string
 }
 
 export type CinemasCreateWithoutScreensInput = {
   cinemaName?: string | null
   cinemaAddress?: string | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
   Brands?: Prisma.BrandsCreateNestedOneWithoutCinemasInput
 }
 
@@ -563,9 +485,6 @@ export type CinemasUncheckedCreateWithoutScreensInput = {
   cinemaName?: string | null
   cinemaAddress?: string | null
   brandId?: number | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
 }
 
 export type CinemasCreateOrConnectWithoutScreensInput = {
@@ -587,9 +506,6 @@ export type CinemasUpdateToOneWithWhereWithoutScreensInput = {
 export type CinemasUpdateWithoutScreensInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Brands?: Prisma.BrandsUpdateOneWithoutCinemasNestedInput
 }
 
@@ -598,26 +514,17 @@ export type CinemasUncheckedUpdateWithoutScreensInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brandId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CinemasCreateManyBrandsInput = {
   cinemaId?: number
   cinemaName?: string | null
   cinemaAddress?: string | null
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
 }
 
 export type CinemasUpdateWithoutBrandsInput = {
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Screens?: Prisma.ScreensUpdateManyWithoutCinemasNestedInput
 }
 
@@ -625,9 +532,6 @@ export type CinemasUncheckedUpdateWithoutBrandsInput = {
   cinemaId?: Prisma.IntFieldUpdateOperationsInput | number
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Screens?: Prisma.ScreensUncheckedUpdateManyWithoutCinemasNestedInput
 }
 
@@ -635,9 +539,6 @@ export type CinemasUncheckedUpdateManyWithoutBrandsInput = {
   cinemaId?: Prisma.IntFieldUpdateOperationsInput | number
   cinemaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -676,9 +577,6 @@ export type CinemasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   cinemaName?: boolean
   cinemaAddress?: boolean
   brandId?: boolean
-  isDeleted?: boolean
-  createAt?: boolean
-  updateAt?: boolean
   Brands?: boolean | Prisma.Cinemas$BrandsArgs<ExtArgs>
   Screens?: boolean | Prisma.Cinemas$ScreensArgs<ExtArgs>
   _count?: boolean | Prisma.CinemasCountOutputTypeDefaultArgs<ExtArgs>
@@ -691,12 +589,9 @@ export type CinemasSelectScalar = {
   cinemaName?: boolean
   cinemaAddress?: boolean
   brandId?: boolean
-  isDeleted?: boolean
-  createAt?: boolean
-  updateAt?: boolean
 }
 
-export type CinemasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"cinemaId" | "cinemaName" | "cinemaAddress" | "brandId" | "isDeleted" | "createAt" | "updateAt", ExtArgs["result"]["cinemas"]>
+export type CinemasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"cinemaId" | "cinemaName" | "cinemaAddress" | "brandId", ExtArgs["result"]["cinemas"]>
 export type CinemasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Brands?: boolean | Prisma.Cinemas$BrandsArgs<ExtArgs>
   Screens?: boolean | Prisma.Cinemas$ScreensArgs<ExtArgs>
@@ -714,9 +609,6 @@ export type $CinemasPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     cinemaName: string | null
     cinemaAddress: string | null
     brandId: number | null
-    isDeleted: boolean
-    createAt: Date
-    updateAt: Date
   }, ExtArgs["result"]["cinemas"]>
   composites: {}
 }
@@ -1092,9 +984,6 @@ export interface CinemasFieldRefs {
   readonly cinemaName: Prisma.FieldRef<"Cinemas", 'String'>
   readonly cinemaAddress: Prisma.FieldRef<"Cinemas", 'String'>
   readonly brandId: Prisma.FieldRef<"Cinemas", 'Int'>
-  readonly isDeleted: Prisma.FieldRef<"Cinemas", 'Boolean'>
-  readonly createAt: Prisma.FieldRef<"Cinemas", 'DateTime'>
-  readonly updateAt: Prisma.FieldRef<"Cinemas", 'DateTime'>
 }
     
 
