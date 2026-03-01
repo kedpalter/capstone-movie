@@ -1,10 +1,13 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Role } from 'src/common/decorators/roles.decorator';
+import { ProtectGuard } from 'src/common/guards/protect.guard';
+import { RoleGuard } from 'src/common/guards/role.guard';
 import { CinemaService } from './cinema.service';
 import { CreateCinemaDto } from './dto/create-cinema.dto';
-import { UpdateCinemaDto } from './dto/update-cinema.dto';
 import { CreateScreenDto } from './dto/create-screen.dto';
 import { CreateSeatDto } from './dto/create-seat.dto';
 import { CreateShowtimeDto } from './dto/create-showtime.dto';
+import { UpdateCinemaDto } from './dto/update-cinema.dto';
 import { UpdateShowtimeDto } from './dto/update-showtime.dto';
 
 @Controller('cinema')
@@ -12,6 +15,8 @@ export class CinemaController {
   constructor(private readonly cinemaService: CinemaService) { }
 
   // GET Brands
+  @UseGuards(ProtectGuard, RoleGuard)
+  @Role('user')
   @Get('all-brands')
   findAllBrands() {
     return this.cinemaService.findAllBrands();

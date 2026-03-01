@@ -1,12 +1,13 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCinemaDto } from './dto/create-cinema.dto';
-import { UpdateCinemaDto } from './dto/update-cinema.dto';
-import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { CheckExistService } from 'src/modules-system/checkExist/checkExist.service';
+import { PrismaService } from 'src/modules-system/prisma/prisma.service';
+import { CreateCinemaDto } from './dto/create-cinema.dto';
 import { CreateScreenDto } from './dto/create-screen.dto';
 import { CreateSeatDto } from './dto/create-seat.dto';
 import { CreateShowtimeDto } from './dto/create-showtime.dto';
+import { UpdateCinemaDto } from './dto/update-cinema.dto';
 import { UpdateShowtimeDto } from './dto/update-showtime.dto';
+
 
 @Injectable()
 export class CinemaService {
