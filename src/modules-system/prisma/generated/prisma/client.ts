@@ -48,6 +48,11 @@ export type Banners = Prisma.BannersModel
  */
 export type Booking = Prisma.BookingModel
 /**
+ * Model BookingDetail
+ * 
+ */
+export type BookingDetail = Prisma.BookingDetailModel
+/**
  * Model Brands
  * 
  */

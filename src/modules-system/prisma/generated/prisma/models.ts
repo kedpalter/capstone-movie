@@ -10,6 +10,7 @@
  */
 export type * from './models/Banners.js'
 export type * from './models/Booking.js'
+export type * from './models/BookingDetail.js'
 export type * from './models/Brands.js'
 export type * from './models/Cinemas.js'
 export type * from './models/Movies.js'

@@ -2,8 +2,9 @@ import { NotFoundException, Injectable } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
-import { AddBannerDto } from './dto/add-banner.dto';
+import { CreateBannerDto } from './dto/add-banner.dto';
 import { CheckExistService } from 'src/modules-system/checkExist/checkExist.service';
+import { queryPrisma } from 'src/common/helpers/queryPrisma.helper';
 
 @Injectable()
 export class MovieService {
@@ -12,18 +13,58 @@ export class MovieService {
     private isExist: CheckExistService
   ) { }
 
-
-  async findAllMovies() {
-    const res = await this.prisma.movies.findMany({
+  async getMovieBanners() {
+    return await this.prisma.banners.findMany({
       where: {
         isDeleted: false
       }
     })
-    return res;
+  }
+
+  async addMovieBanner(createBannerDto: CreateBannerDto) {
+    const isMovie = await this.isExist.checkExist("movies", { movieId: createBannerDto.movieId })
+    if (!isMovie) throw new NotFoundException("Movie not found")
+
+    return await this.prisma.banners.create({
+      data: createBannerDto
+    })
+  }
+
+  async removeMovieBanner(bannerId: number) {
+    const isBanner = await this.prisma.banners.update({
+      where: {
+        bannerId,
+        isDeleted: false
+      },
+      data: {
+        isDeleted: true
+      }
+    })
+    if (!isBanner) throw new NotFoundException("Banner Not Found!")
+    return true;
+  }
+
+  async findAllMovies(isShowing?: boolean, isUpcoming?: boolean, isTrending?: boolean, page?: number, pageSize?: number) {
+    const { pagePagi, pageSizePagi, index } = queryPrisma(page, pageSize)
+    const res = await this.prisma.movies.findMany({
+      where: {
+        isDeleted: false,
+        isShowing,
+        isUpcoming,
+        isTrending
+      },
+      skip: index,
+      take: pageSizePagi
+    })
+    return {
+      page: pagePagi,
+      pageSize: pageSizePagi,
+      items: res
+    }
   }
 
   async movieDetail(id: number) {
-    const res = await this.prisma.movies.findUnique({
+    const isMovie = await this.prisma.movies.findUnique({
       where: {
         movieId: id,
         isDeleted: false
@@ -32,90 +73,46 @@ export class MovieService {
         Banners: true
       }
     })
-    if (!res) throw new NotFoundException("Movie not found")
-    return res;
+    if (!isMovie) throw new NotFoundException("Movie not found")
+    return isMovie;
   }
 
   async createMovie(createMovieDto: CreateMovieDto) {
-    console.log(createMovieDto)
-    await this.prisma.movies.create({
+    return await this.prisma.movies.create({
       data: {
         ...createMovieDto,
         dateRelease: new Date(createMovieDto.dateRelease),
       }
     })
-    return true;
   }
 
-  async updateMovie(id: number, updateMovieDto: UpdateMovieDto) {
-    const isExist = await this.isExist.checkExist("movies", { movieId: id })
-    if (!isExist) throw new NotFoundException("Movie not found")
-
-    const newData = await this.prisma.movies.update({
+  async updateMovie(movieId: number, updateMovieDto: UpdateMovieDto) {
+    const isMovie = await this.prisma.movies.update({
       where: {
-        movieId: id
+        movieId,
+        isDeleted: false
       },
       data: {
         ...updateMovieDto,
         dateRelease: updateMovieDto.dateRelease ? new Date(updateMovieDto.dateRelease) : undefined
       }
     })
-    return newData;
+    if (!isMovie) throw new NotFoundException("Movie Not Found")
+    return isMovie;
   }
 
-  async removeMovie(id: number) {
-    const isExist = await this.isExist.checkExist("movies", { movieId: id })
-    if (!isExist) throw new NotFoundException("Movie not found")
-
-    await this.prisma.movies.update({
+  async removeMovie(movieId: number) {
+    const isMovie = await this.prisma.movies.update({
       where: {
-        movieId: id
-      },
-      data: {
-        isDeleted: true
-      }
-    })
-    return true;
-  }
-
-  async getMovieBanners(id: number) {
-    const isExist = await this.isExist.checkExist("movies", { movieId: id })
-    if (!isExist) throw new NotFoundException("Movie not found")
-
-    const res = await this.prisma.banners.findMany({
-      where: {
-        movieId: id,
+        movieId,
         isDeleted: false
-      }
-    })
-    return res;
-  }
-
-  async addMovieBanner(id: number, payload: AddBannerDto) {
-    const isExist = await this.isExist.checkExist("movies", { movieId: id })
-    if (!isExist) throw new NotFoundException("Movie not found")
-
-    const { bannerImage } = payload;
-    const newData = await this.prisma.banners.create({
-      data: {
-        movieId: id,
-        bannerImage: bannerImage
-      }
-    })
-    return newData;
-  }
-
-  async removeMovieBanner(bannerId: number) {
-    const isExist = await this.isExist.checkExist("banners", { bannerId })
-    if (!isExist) throw new NotFoundException("Banner not found")
-    await this.prisma.banners.update({
-      where: {
-        bannerId
       },
       data: {
         isDeleted: true
       }
     })
+    if (!isMovie) throw new NotFoundException("Movie Not Found")
     return true;
   }
+
 }

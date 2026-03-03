@@ -234,14 +234,14 @@ export type MoviesGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type MoviesGroupByOutputType = {
   movieId: number
   movieName: string
-  movieTrailer: string
+  movieTrailer: string | null
   movieImage: string | null
-  movieDescription: string
-  dateRelease: Date
+  movieDescription: string | null
+  dateRelease: Date | null
   movieRating: number | null
-  isTrending: boolean
-  isShowing: boolean
-  isUpcoming: boolean
+  isTrending: boolean | null
+  isShowing: boolean | null
+  isUpcoming: boolean | null
   isDeleted: boolean
   createAt: Date
   updateAt: Date
@@ -273,35 +273,37 @@ export type MoviesWhereInput = {
   NOT?: Prisma.MoviesWhereInput | Prisma.MoviesWhereInput[]
   movieId?: Prisma.IntFilter<"Movies"> | number
   movieName?: Prisma.StringFilter<"Movies"> | string
-  movieTrailer?: Prisma.StringFilter<"Movies"> | string
+  movieTrailer?: Prisma.StringNullableFilter<"Movies"> | string | null
   movieImage?: Prisma.StringNullableFilter<"Movies"> | string | null
-  movieDescription?: Prisma.StringFilter<"Movies"> | string
-  dateRelease?: Prisma.DateTimeFilter<"Movies"> | Date | string
+  movieDescription?: Prisma.StringNullableFilter<"Movies"> | string | null
+  dateRelease?: Prisma.DateTimeNullableFilter<"Movies"> | Date | string | null
   movieRating?: Prisma.IntNullableFilter<"Movies"> | number | null
-  isTrending?: Prisma.BoolFilter<"Movies"> | boolean
-  isShowing?: Prisma.BoolFilter<"Movies"> | boolean
-  isUpcoming?: Prisma.BoolFilter<"Movies"> | boolean
+  isTrending?: Prisma.BoolNullableFilter<"Movies"> | boolean | null
+  isShowing?: Prisma.BoolNullableFilter<"Movies"> | boolean | null
+  isUpcoming?: Prisma.BoolNullableFilter<"Movies"> | boolean | null
   isDeleted?: Prisma.BoolFilter<"Movies"> | boolean
   createAt?: Prisma.DateTimeFilter<"Movies"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Movies"> | Date | string
   Banners?: Prisma.BannersListRelationFilter
+  Showtime?: Prisma.ShowtimeListRelationFilter
 }
 
 export type MoviesOrderByWithRelationInput = {
   movieId?: Prisma.SortOrder
   movieName?: Prisma.SortOrder
-  movieTrailer?: Prisma.SortOrder
+  movieTrailer?: Prisma.SortOrderInput | Prisma.SortOrder
   movieImage?: Prisma.SortOrderInput | Prisma.SortOrder
-  movieDescription?: Prisma.SortOrder
-  dateRelease?: Prisma.SortOrder
+  movieDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateRelease?: Prisma.SortOrderInput | Prisma.SortOrder
   movieRating?: Prisma.SortOrderInput | Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  isShowing?: Prisma.SortOrder
-  isUpcoming?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrderInput | Prisma.SortOrder
+  isShowing?: Prisma.SortOrderInput | Prisma.SortOrder
+  isUpcoming?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
   Banners?: Prisma.BannersOrderByRelationAggregateInput
+  Showtime?: Prisma.ShowtimeOrderByRelationAggregateInput
   _relevance?: Prisma.MoviesOrderByRelevanceInput
 }
 
@@ -311,31 +313,32 @@ export type MoviesWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MoviesWhereInput[]
   NOT?: Prisma.MoviesWhereInput | Prisma.MoviesWhereInput[]
   movieName?: Prisma.StringFilter<"Movies"> | string
-  movieTrailer?: Prisma.StringFilter<"Movies"> | string
+  movieTrailer?: Prisma.StringNullableFilter<"Movies"> | string | null
   movieImage?: Prisma.StringNullableFilter<"Movies"> | string | null
-  movieDescription?: Prisma.StringFilter<"Movies"> | string
-  dateRelease?: Prisma.DateTimeFilter<"Movies"> | Date | string
+  movieDescription?: Prisma.StringNullableFilter<"Movies"> | string | null
+  dateRelease?: Prisma.DateTimeNullableFilter<"Movies"> | Date | string | null
   movieRating?: Prisma.IntNullableFilter<"Movies"> | number | null
-  isTrending?: Prisma.BoolFilter<"Movies"> | boolean
-  isShowing?: Prisma.BoolFilter<"Movies"> | boolean
-  isUpcoming?: Prisma.BoolFilter<"Movies"> | boolean
+  isTrending?: Prisma.BoolNullableFilter<"Movies"> | boolean | null
+  isShowing?: Prisma.BoolNullableFilter<"Movies"> | boolean | null
+  isUpcoming?: Prisma.BoolNullableFilter<"Movies"> | boolean | null
   isDeleted?: Prisma.BoolFilter<"Movies"> | boolean
   createAt?: Prisma.DateTimeFilter<"Movies"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Movies"> | Date | string
   Banners?: Prisma.BannersListRelationFilter
+  Showtime?: Prisma.ShowtimeListRelationFilter
 }, "movieId">
 
 export type MoviesOrderByWithAggregationInput = {
   movieId?: Prisma.SortOrder
   movieName?: Prisma.SortOrder
-  movieTrailer?: Prisma.SortOrder
+  movieTrailer?: Prisma.SortOrderInput | Prisma.SortOrder
   movieImage?: Prisma.SortOrderInput | Prisma.SortOrder
-  movieDescription?: Prisma.SortOrder
-  dateRelease?: Prisma.SortOrder
+  movieDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateRelease?: Prisma.SortOrderInput | Prisma.SortOrder
   movieRating?: Prisma.SortOrderInput | Prisma.SortOrder
-  isTrending?: Prisma.SortOrder
-  isShowing?: Prisma.SortOrder
-  isUpcoming?: Prisma.SortOrder
+  isTrending?: Prisma.SortOrderInput | Prisma.SortOrder
+  isShowing?: Prisma.SortOrderInput | Prisma.SortOrder
+  isUpcoming?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
@@ -352,14 +355,14 @@ export type MoviesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MoviesScalarWhereWithAggregatesInput | Prisma.MoviesScalarWhereWithAggregatesInput[]
   movieId?: Prisma.IntWithAggregatesFilter<"Movies"> | number
   movieName?: Prisma.StringWithAggregatesFilter<"Movies"> | string
-  movieTrailer?: Prisma.StringWithAggregatesFilter<"Movies"> | string
+  movieTrailer?: Prisma.StringNullableWithAggregatesFilter<"Movies"> | string | null
   movieImage?: Prisma.StringNullableWithAggregatesFilter<"Movies"> | string | null
-  movieDescription?: Prisma.StringWithAggregatesFilter<"Movies"> | string
-  dateRelease?: Prisma.DateTimeWithAggregatesFilter<"Movies"> | Date | string
+  movieDescription?: Prisma.StringNullableWithAggregatesFilter<"Movies"> | string | null
+  dateRelease?: Prisma.DateTimeNullableWithAggregatesFilter<"Movies"> | Date | string | null
   movieRating?: Prisma.IntNullableWithAggregatesFilter<"Movies"> | number | null
-  isTrending?: Prisma.BoolWithAggregatesFilter<"Movies"> | boolean
-  isShowing?: Prisma.BoolWithAggregatesFilter<"Movies"> | boolean
-  isUpcoming?: Prisma.BoolWithAggregatesFilter<"Movies"> | boolean
+  isTrending?: Prisma.BoolNullableWithAggregatesFilter<"Movies"> | boolean | null
+  isShowing?: Prisma.BoolNullableWithAggregatesFilter<"Movies"> | boolean | null
+  isUpcoming?: Prisma.BoolNullableWithAggregatesFilter<"Movies"> | boolean | null
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Movies"> | boolean
   createAt?: Prisma.DateTimeWithAggregatesFilter<"Movies"> | Date | string
   updateAt?: Prisma.DateTimeWithAggregatesFilter<"Movies"> | Date | string
@@ -367,81 +370,85 @@ export type MoviesScalarWhereWithAggregatesInput = {
 
 export type MoviesCreateInput = {
   movieName: string
-  movieTrailer: string
+  movieTrailer?: string | null
   movieImage?: string | null
-  movieDescription: string
-  dateRelease: Date | string
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
   movieRating?: number | null
-  isTrending: boolean
-  isShowing: boolean
-  isUpcoming: boolean
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Banners?: Prisma.BannersCreateNestedManyWithoutMoviesInput
+  Showtime?: Prisma.ShowtimeCreateNestedManyWithoutMoviesInput
 }
 
 export type MoviesUncheckedCreateInput = {
   movieId?: number
   movieName: string
-  movieTrailer: string
+  movieTrailer?: string | null
   movieImage?: string | null
-  movieDescription: string
-  dateRelease: Date | string
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
   movieRating?: number | null
-  isTrending: boolean
-  isShowing: boolean
-  isUpcoming: boolean
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Banners?: Prisma.BannersUncheckedCreateNestedManyWithoutMoviesInput
+  Showtime?: Prisma.ShowtimeUncheckedCreateNestedManyWithoutMoviesInput
 }
 
 export type MoviesUpdateInput = {
   movieName?: Prisma.StringFieldUpdateOperationsInput | string
-  movieTrailer?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  movieDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  dateRelease?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isShowing?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isUpcoming?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Banners?: Prisma.BannersUpdateManyWithoutMoviesNestedInput
+  Showtime?: Prisma.ShowtimeUpdateManyWithoutMoviesNestedInput
 }
 
 export type MoviesUncheckedUpdateInput = {
   movieId?: Prisma.IntFieldUpdateOperationsInput | number
   movieName?: Prisma.StringFieldUpdateOperationsInput | string
-  movieTrailer?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  movieDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  dateRelease?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isShowing?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isUpcoming?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Banners?: Prisma.BannersUncheckedUpdateManyWithoutMoviesNestedInput
+  Showtime?: Prisma.ShowtimeUncheckedUpdateManyWithoutMoviesNestedInput
 }
 
 export type MoviesCreateManyInput = {
   movieId?: number
   movieName: string
-  movieTrailer: string
+  movieTrailer?: string | null
   movieImage?: string | null
-  movieDescription: string
-  dateRelease: Date | string
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
   movieRating?: number | null
-  isTrending: boolean
-  isShowing: boolean
-  isUpcoming: boolean
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
@@ -449,14 +456,14 @@ export type MoviesCreateManyInput = {
 
 export type MoviesUpdateManyMutationInput = {
   movieName?: Prisma.StringFieldUpdateOperationsInput | string
-  movieTrailer?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  movieDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  dateRelease?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isShowing?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isUpcoming?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -465,14 +472,14 @@ export type MoviesUpdateManyMutationInput = {
 export type MoviesUncheckedUpdateManyInput = {
   movieId?: Prisma.IntFieldUpdateOperationsInput | number
   movieName?: Prisma.StringFieldUpdateOperationsInput | string
-  movieTrailer?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  movieDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  dateRelease?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isShowing?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isUpcoming?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -561,35 +568,59 @@ export type MoviesUpdateOneRequiredWithoutBannersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MoviesUpdateToOneWithWhereWithoutBannersInput, Prisma.MoviesUpdateWithoutBannersInput>, Prisma.MoviesUncheckedUpdateWithoutBannersInput>
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
+export type MoviesCreateNestedOneWithoutShowtimeInput = {
+  create?: Prisma.XOR<Prisma.MoviesCreateWithoutShowtimeInput, Prisma.MoviesUncheckedCreateWithoutShowtimeInput>
+  connectOrCreate?: Prisma.MoviesCreateOrConnectWithoutShowtimeInput
+  connect?: Prisma.MoviesWhereUniqueInput
+}
+
+export type MoviesUpdateOneRequiredWithoutShowtimeNestedInput = {
+  create?: Prisma.XOR<Prisma.MoviesCreateWithoutShowtimeInput, Prisma.MoviesUncheckedCreateWithoutShowtimeInput>
+  connectOrCreate?: Prisma.MoviesCreateOrConnectWithoutShowtimeInput
+  upsert?: Prisma.MoviesUpsertWithoutShowtimeInput
+  connect?: Prisma.MoviesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MoviesUpdateToOneWithWhereWithoutShowtimeInput, Prisma.MoviesUpdateWithoutShowtimeInput>, Prisma.MoviesUncheckedUpdateWithoutShowtimeInput>
+}
+
 export type MoviesCreateWithoutBannersInput = {
   movieName: string
-  movieTrailer: string
+  movieTrailer?: string | null
   movieImage?: string | null
-  movieDescription: string
-  dateRelease: Date | string
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
   movieRating?: number | null
-  isTrending: boolean
-  isShowing: boolean
-  isUpcoming: boolean
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
+  Showtime?: Prisma.ShowtimeCreateNestedManyWithoutMoviesInput
 }
 
 export type MoviesUncheckedCreateWithoutBannersInput = {
   movieId?: number
   movieName: string
-  movieTrailer: string
+  movieTrailer?: string | null
   movieImage?: string | null
-  movieDescription: string
-  dateRelease: Date | string
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
   movieRating?: number | null
-  isTrending: boolean
-  isShowing: boolean
-  isUpcoming: boolean
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
+  Showtime?: Prisma.ShowtimeUncheckedCreateNestedManyWithoutMoviesInput
 }
 
 export type MoviesCreateOrConnectWithoutBannersInput = {
@@ -610,33 +641,117 @@ export type MoviesUpdateToOneWithWhereWithoutBannersInput = {
 
 export type MoviesUpdateWithoutBannersInput = {
   movieName?: Prisma.StringFieldUpdateOperationsInput | string
-  movieTrailer?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  movieDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  dateRelease?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isShowing?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isUpcoming?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Showtime?: Prisma.ShowtimeUpdateManyWithoutMoviesNestedInput
 }
 
 export type MoviesUncheckedUpdateWithoutBannersInput = {
   movieId?: Prisma.IntFieldUpdateOperationsInput | number
   movieName?: Prisma.StringFieldUpdateOperationsInput | string
-  movieTrailer?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  movieDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  dateRelease?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isTrending?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isShowing?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isUpcoming?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Showtime?: Prisma.ShowtimeUncheckedUpdateManyWithoutMoviesNestedInput
+}
+
+export type MoviesCreateWithoutShowtimeInput = {
+  movieName: string
+  movieTrailer?: string | null
+  movieImage?: string | null
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
+  movieRating?: number | null
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  Banners?: Prisma.BannersCreateNestedManyWithoutMoviesInput
+}
+
+export type MoviesUncheckedCreateWithoutShowtimeInput = {
+  movieId?: number
+  movieName: string
+  movieTrailer?: string | null
+  movieImage?: string | null
+  movieDescription?: string | null
+  dateRelease?: Date | string | null
+  movieRating?: number | null
+  isTrending?: boolean | null
+  isShowing?: boolean | null
+  isUpcoming?: boolean | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  Banners?: Prisma.BannersUncheckedCreateNestedManyWithoutMoviesInput
+}
+
+export type MoviesCreateOrConnectWithoutShowtimeInput = {
+  where: Prisma.MoviesWhereUniqueInput
+  create: Prisma.XOR<Prisma.MoviesCreateWithoutShowtimeInput, Prisma.MoviesUncheckedCreateWithoutShowtimeInput>
+}
+
+export type MoviesUpsertWithoutShowtimeInput = {
+  update: Prisma.XOR<Prisma.MoviesUpdateWithoutShowtimeInput, Prisma.MoviesUncheckedUpdateWithoutShowtimeInput>
+  create: Prisma.XOR<Prisma.MoviesCreateWithoutShowtimeInput, Prisma.MoviesUncheckedCreateWithoutShowtimeInput>
+  where?: Prisma.MoviesWhereInput
+}
+
+export type MoviesUpdateToOneWithWhereWithoutShowtimeInput = {
+  where?: Prisma.MoviesWhereInput
+  data: Prisma.XOR<Prisma.MoviesUpdateWithoutShowtimeInput, Prisma.MoviesUncheckedUpdateWithoutShowtimeInput>
+}
+
+export type MoviesUpdateWithoutShowtimeInput = {
+  movieName?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Banners?: Prisma.BannersUpdateManyWithoutMoviesNestedInput
+}
+
+export type MoviesUncheckedUpdateWithoutShowtimeInput = {
+  movieId?: Prisma.IntFieldUpdateOperationsInput | number
+  movieName?: Prisma.StringFieldUpdateOperationsInput | string
+  movieTrailer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  movieImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  movieDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateRelease?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  movieRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isTrending?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isShowing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isUpcoming?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Banners?: Prisma.BannersUncheckedUpdateManyWithoutMoviesNestedInput
 }
 
 
@@ -646,10 +761,12 @@ export type MoviesUncheckedUpdateWithoutBannersInput = {
 
 export type MoviesCountOutputType = {
   Banners: number
+  Showtime: number
 }
 
 export type MoviesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Banners?: boolean | MoviesCountOutputTypeCountBannersArgs
+  Showtime?: boolean | MoviesCountOutputTypeCountShowtimeArgs
 }
 
 /**
@@ -669,6 +786,13 @@ export type MoviesCountOutputTypeCountBannersArgs<ExtArgs extends runtime.Types.
   where?: Prisma.BannersWhereInput
 }
 
+/**
+ * MoviesCountOutputType without action
+ */
+export type MoviesCountOutputTypeCountShowtimeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShowtimeWhereInput
+}
+
 
 export type MoviesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   movieId?: boolean
@@ -685,6 +809,7 @@ export type MoviesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createAt?: boolean
   updateAt?: boolean
   Banners?: boolean | Prisma.Movies$BannersArgs<ExtArgs>
+  Showtime?: boolean | Prisma.Movies$ShowtimeArgs<ExtArgs>
   _count?: boolean | Prisma.MoviesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["movies"]>
 
@@ -709,6 +834,7 @@ export type MoviesSelectScalar = {
 export type MoviesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"movieId" | "movieName" | "movieTrailer" | "movieImage" | "movieDescription" | "dateRelease" | "movieRating" | "isTrending" | "isShowing" | "isUpcoming" | "isDeleted" | "createAt" | "updateAt", ExtArgs["result"]["movies"]>
 export type MoviesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Banners?: boolean | Prisma.Movies$BannersArgs<ExtArgs>
+  Showtime?: boolean | Prisma.Movies$ShowtimeArgs<ExtArgs>
   _count?: boolean | Prisma.MoviesCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -716,18 +842,19 @@ export type $MoviesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Movies"
   objects: {
     Banners: Prisma.$BannersPayload<ExtArgs>[]
+    Showtime: Prisma.$ShowtimePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     movieId: number
     movieName: string
-    movieTrailer: string
+    movieTrailer: string | null
     movieImage: string | null
-    movieDescription: string
-    dateRelease: Date
+    movieDescription: string | null
+    dateRelease: Date | null
     movieRating: number | null
-    isTrending: boolean
-    isShowing: boolean
-    isUpcoming: boolean
+    isTrending: boolean | null
+    isShowing: boolean | null
+    isUpcoming: boolean | null
     isDeleted: boolean
     createAt: Date
     updateAt: Date
@@ -1072,6 +1199,7 @@ readonly fields: MoviesFieldRefs;
 export interface Prisma__MoviesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Banners<T extends Prisma.Movies$BannersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movies$BannersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BannersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Showtime<T extends Prisma.Movies$ShowtimeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movies$ShowtimeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShowtimePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1478,6 +1606,30 @@ export type Movies$BannersArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.BannersScalarFieldEnum | Prisma.BannersScalarFieldEnum[]
+}
+
+/**
+ * Movies.Showtime
+ */
+export type Movies$ShowtimeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Showtime
+   */
+  select?: Prisma.ShowtimeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Showtime
+   */
+  omit?: Prisma.ShowtimeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShowtimeInclude<ExtArgs> | null
+  where?: Prisma.ShowtimeWhereInput
+  orderBy?: Prisma.ShowtimeOrderByWithRelationInput | Prisma.ShowtimeOrderByWithRelationInput[]
+  cursor?: Prisma.ShowtimeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShowtimeScalarFieldEnum | Prisma.ShowtimeScalarFieldEnum[]
 }
 
 /**

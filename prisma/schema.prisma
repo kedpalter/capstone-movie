@@ -15,106 +15,127 @@ model Banners {
   isDeleted   Boolean  @default(false)
   createAt    DateTime @default(now()) @db.Timestamp(0)
   updateAt    DateTime @default(now()) @db.Timestamp(0)
-  Movies      Movies   @relation(fields: [movieId], references: [movieId], onDelete: NoAction, onUpdate: NoAction, map: "FK_movieId")
+  Movies      Movies   @relation(fields: [movieId], references: [movieId], onDelete: NoAction, onUpdate: NoAction, map: "Banners_ibfk_1")
 
-  @@index([movieId], map: "FK_movieId")
+  @@index([movieId], map: "movieId")
 }
 
 model Booking {
-  bookingId Int      @id @default(autoincrement())
-  userId    Int
+  bookingId     Int             @id @default(autoincrement())
+  userId        Int
+  createAt      DateTime        @default(now()) @db.Timestamp(0)
+  BookingDetail BookingDetail[]
+}
+
+model BookingDetail {
+  detailId  Int      @id @default(autoincrement())
+  bookingId Int
   showId    Int
   seatId    Int
-  createAt  DateTime @default(now()) @db.Timestamp(0)
-  Seats     Seats    @relation(fields: [seatId], references: [seatId], onDelete: NoAction, onUpdate: NoAction, map: "FK_seatId")
-  Showtime  Showtime @relation(fields: [showId], references: [showId], onDelete: NoAction, onUpdate: NoAction, map: "FK_showId")
-  Users     Users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_userId")
+  Booking   Booking  @relation(fields: [bookingId], references: [bookingId], onDelete: NoAction, onUpdate: NoAction, map: "BookingDetail_ibfk_1")
+  Showtime  Showtime @relation(fields: [showId], references: [showId], onDelete: NoAction, onUpdate: NoAction, map: "BookingDetail_ibfk_2")
+  Seats     Seats    @relation(fields: [seatId], references: [seatId], onDelete: NoAction, onUpdate: NoAction, map: "BookingDetail_ibfk_3")
 
   @@unique([showId, seatId], map: "showId")
-  @@index([seatId], map: "FK_seatId")
-  @@index([userId], map: "FK_userId")
+  @@index([bookingId], map: "bookingId")
+  @@index([seatId], map: "seatId")
 }
 
 model Brands {
   brandId   Int       @id @default(autoincrement())
-  brandName String?   @db.VarChar(255)
+  brandName String    @db.VarChar(255)
   brandLogo String?   @db.VarChar(255)
+  isDeleted Boolean   @default(false)
+  createAt  DateTime  @default(now()) @db.Timestamp(0)
+  updateAt  DateTime  @default(now()) @db.Timestamp(0)
   Cinemas   Cinemas[]
 }
 
 model Cinemas {
   cinemaId      Int       @id @default(autoincrement())
-  cinemaName    String?   @db.VarChar(255)
+  cinemaName    String    @db.VarChar(255)
   cinemaAddress String?   @db.VarChar(255)
   brandId       Int?
-  Brands        Brands?   @relation(fields: [brandId], references: [brandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_brandId")
+  isDeleted     Boolean   @default(false)
+  createAt      DateTime  @default(now()) @db.Timestamp(0)
+  updateAt      DateTime  @default(now()) @db.Timestamp(0)
+  Brands        Brands?   @relation(fields: [brandId], references: [brandId], onDelete: NoAction, onUpdate: NoAction, map: "Cinemas_ibfk_1")
   Screens       Screens[]
 
-  @@index([brandId], map: "FK_brandId")
+  @@index([brandId], map: "brandId")
 }
 
 model Movies {
-  movieId          Int       @id @default(autoincrement())
-  movieName        String    @db.VarChar(255)
-  movieTrailer     String    @db.VarChar(255)
-  movieImage       String?   @db.VarChar(255)
-  movieDescription String    @db.Text
-  dateRelease      DateTime  @db.DateTime(0)
+  movieId          Int        @id @default(autoincrement())
+  movieName        String     @db.VarChar(255)
+  movieTrailer     String?    @db.VarChar(255)
+  movieImage       String?    @db.VarChar(255)
+  movieDescription String?    @db.Text
+  dateRelease      DateTime?  @db.DateTime(0)
   movieRating      Int?
-  isTrending       Boolean
-  isShowing        Boolean
-  isUpcoming       Boolean
-  isDeleted        Boolean   @default(false)
-  createAt         DateTime  @default(now()) @db.Timestamp(0)
-  updateAt         DateTime  @default(now()) @db.Timestamp(0)
+  isTrending       Boolean?
+  isShowing        Boolean?
+  isUpcoming       Boolean?
+  isDeleted        Boolean    @default(false)
+  createAt         DateTime   @default(now()) @db.Timestamp(0)
+  updateAt         DateTime   @default(now()) @db.Timestamp(0)
   Banners          Banners[]
+  Showtime         Showtime[]
 }
 
 model Screens {
-  screenId   Int      @id @default(autoincrement())
-  screenName String   @db.VarChar(255)
+  screenId   Int        @id @default(autoincrement())
+  screenName String?    @db.VarChar(255)
   cinemaId   Int
-  isDeleted  Boolean  @default(false)
-  createAt   DateTime @default(now()) @db.Timestamp(0)
-  updateAt   DateTime @default(now()) @db.Timestamp(0)
-  Cinemas    Cinemas  @relation(fields: [cinemaId], references: [cinemaId], onDelete: NoAction, onUpdate: NoAction, map: "FK_cinemaId")
+  isDeleted  Boolean    @default(false)
+  createAt   DateTime   @default(now()) @db.Timestamp(0)
+  updateAt   DateTime   @default(now()) @db.Timestamp(0)
+  Cinemas    Cinemas    @relation(fields: [cinemaId], references: [cinemaId], onDelete: NoAction, onUpdate: NoAction, map: "Screens_ibfk_1")
   Seats      Seats[]
+  Showtime   Showtime[]
 
-  @@index([cinemaId], map: "FK_cinemaId")
+  @@index([cinemaId], map: "cinemaId")
 }
 
 model Seats {
-  seatId   Int       @id @default(autoincrement())
-  seatName String    @db.Char(3)
-  seatType String    @db.VarChar(255)
-  screenId Int
-  Booking  Booking[]
-  Screens  Screens   @relation(fields: [screenId], references: [screenId], onDelete: NoAction, onUpdate: NoAction, map: "FK_screenId")
+  seatId        Int             @id @default(autoincrement())
+  seatName      String          @db.Char(3)
+  seatType      String          @db.VarChar(255)
+  screenId      Int
+  isDeleted     Boolean         @default(false)
+  createAt      DateTime        @default(now()) @db.Timestamp(0)
+  updateAt      DateTime        @default(now()) @db.Timestamp(0)
+  BookingDetail BookingDetail[]
+  Screens       Screens         @relation(fields: [screenId], references: [screenId], onDelete: NoAction, onUpdate: NoAction, map: "Seats_ibfk_1")
 
-  @@index([screenId], map: "FK_screenId")
+  @@index([screenId], map: "screenId")
 }
 
 model Showtime {
-  showId       Int       @id @default(autoincrement())
-  screenId     Int
-  movieId      Int
-  showTime     DateTime  @db.DateTime(0)
-  bookingPrice Int
-  isDeleted    Boolean   @default(false)
-  createAt     DateTime  @default(now()) @db.Timestamp(0)
-  updateAt     DateTime  @default(now()) @db.Timestamp(0)
-  Booking      Booking[]
+  showId        Int             @id @default(autoincrement())
+  screenId      Int
+  movieId       Int
+  showTime      DateTime        @db.DateTime(0)
+  bookingPrice  Int
+  isDeleted     Boolean         @default(false)
+  createAt      DateTime        @default(now()) @db.Timestamp(0)
+  updateAt      DateTime        @default(now()) @db.Timestamp(0)
+  BookingDetail BookingDetail[]
+  Screens       Screens         @relation(fields: [screenId], references: [screenId], onDelete: NoAction, onUpdate: NoAction, map: "Showtime_ibfk_1")
+  Movies        Movies          @relation(fields: [movieId], references: [movieId], onDelete: NoAction, onUpdate: NoAction, map: "Showtime_ibfk_2")
+
+  @@index([movieId], map: "movieId")
+  @@index([screenId], map: "screenId")
 }
 
 model Users {
-  userId       Int       @id @default(autoincrement())
-  userFullname String    @db.VarChar(255)
-  userEmail    String    @unique(map: "userEmail") @db.VarChar(255)
-  userPhone    String?   @db.VarChar(255)
-  userPassword String    @db.VarChar(255)
-  userType     String    @db.VarChar(255)
-  isDeleted    Boolean   @default(false)
-  createAt     DateTime  @default(now()) @db.Timestamp(0)
-  updateAt     DateTime  @default(now()) @db.Timestamp(0)
-  Booking      Booking[]
+  userId       Int      @id @default(autoincrement())
+  userFullname String?  @db.VarChar(255)
+  userEmail    String   @unique(map: "userEmail") @db.VarChar(255)
+  userPhone    String?  @db.VarChar(255)
+  userPassword String   @db.VarChar(255)
+  userType     String?  @db.VarChar(255)
+  isDeleted    Boolean  @default(false)
+  createAt     DateTime @default(now()) @db.Timestamp(0)
+  updateAt     DateTime @default(now()) @db.Timestamp(0)
 }

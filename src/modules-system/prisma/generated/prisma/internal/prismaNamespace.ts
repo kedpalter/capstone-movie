@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Banners: 'Banners',
   Booking: 'Booking',
+  BookingDetail: 'BookingDetail',
   Brands: 'Brands',
   Cinemas: 'Cinemas',
   Movies: 'Movies',
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "banners" | "booking" | "brands" | "cinemas" | "movies" | "screens" | "seats" | "showtime" | "users"
+    modelProps: "banners" | "booking" | "bookingDetail" | "brands" | "cinemas" | "movies" | "screens" | "seats" | "showtime" | "users"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -541,6 +542,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.BookingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.BookingCountAggregateOutputType> | number
+        }
+      }
+    }
+    BookingDetail: {
+      payload: Prisma.$BookingDetailPayload<ExtArgs>
+      fields: Prisma.BookingDetailFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingDetailFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingDetailFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>
+        }
+        findFirst: {
+          args: Prisma.BookingDetailFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingDetailFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>
+        }
+        findMany: {
+          args: Prisma.BookingDetailFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>[]
+        }
+        create: {
+          args: Prisma.BookingDetailCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>
+        }
+        createMany: {
+          args: Prisma.BookingDetailCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.BookingDetailDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>
+        }
+        update: {
+          args: Prisma.BookingDetailUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingDetailDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingDetailUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.BookingDetailUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingDetailPayload>
+        }
+        aggregate: {
+          args: Prisma.BookingDetailAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBookingDetail>
+        }
+        groupBy: {
+          args: Prisma.BookingDetailGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingDetailGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingDetailCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingDetailCountAggregateOutputType> | number
         }
       }
     }
@@ -1060,18 +1127,29 @@ export type BannersScalarFieldEnum = (typeof BannersScalarFieldEnum)[keyof typeo
 export const BookingScalarFieldEnum = {
   bookingId: 'bookingId',
   userId: 'userId',
-  showId: 'showId',
-  seatId: 'seatId',
   createAt: 'createAt'
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
 
 
+export const BookingDetailScalarFieldEnum = {
+  detailId: 'detailId',
+  bookingId: 'bookingId',
+  showId: 'showId',
+  seatId: 'seatId'
+} as const
+
+export type BookingDetailScalarFieldEnum = (typeof BookingDetailScalarFieldEnum)[keyof typeof BookingDetailScalarFieldEnum]
+
+
 export const BrandsScalarFieldEnum = {
   brandId: 'brandId',
   brandName: 'brandName',
-  brandLogo: 'brandLogo'
+  brandLogo: 'brandLogo',
+  isDeleted: 'isDeleted',
+  createAt: 'createAt',
+  updateAt: 'updateAt'
 } as const
 
 export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof BrandsScalarFieldEnum]
@@ -1081,7 +1159,10 @@ export const CinemasScalarFieldEnum = {
   cinemaId: 'cinemaId',
   cinemaName: 'cinemaName',
   cinemaAddress: 'cinemaAddress',
-  brandId: 'brandId'
+  brandId: 'brandId',
+  isDeleted: 'isDeleted',
+  createAt: 'createAt',
+  updateAt: 'updateAt'
 } as const
 
 export type CinemasScalarFieldEnum = (typeof CinemasScalarFieldEnum)[keyof typeof CinemasScalarFieldEnum]
@@ -1122,7 +1203,10 @@ export const SeatsScalarFieldEnum = {
   seatId: 'seatId',
   seatName: 'seatName',
   seatType: 'seatType',
-  screenId: 'screenId'
+  screenId: 'screenId',
+  isDeleted: 'isDeleted',
+  createAt: 'createAt',
+  updateAt: 'updateAt'
 } as const
 
 export type SeatsScalarFieldEnum = (typeof SeatsScalarFieldEnum)[keyof typeof SeatsScalarFieldEnum]
@@ -1369,6 +1453,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   banners?: Prisma.BannersOmit
   booking?: Prisma.BookingOmit
+  bookingDetail?: Prisma.BookingDetailOmit
   brands?: Prisma.BrandsOmit
   cinemas?: Prisma.CinemasOmit
   movies?: Prisma.MoviesOmit

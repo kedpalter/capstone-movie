@@ -252,7 +252,9 @@ export type ShowtimeWhereInput = {
   isDeleted?: Prisma.BoolFilter<"Showtime"> | boolean
   createAt?: Prisma.DateTimeFilter<"Showtime"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Showtime"> | Date | string
-  Booking?: Prisma.BookingListRelationFilter
+  BookingDetail?: Prisma.BookingDetailListRelationFilter
+  Screens?: Prisma.XOR<Prisma.ScreensScalarRelationFilter, Prisma.ScreensWhereInput>
+  Movies?: Prisma.XOR<Prisma.MoviesScalarRelationFilter, Prisma.MoviesWhereInput>
 }
 
 export type ShowtimeOrderByWithRelationInput = {
@@ -264,7 +266,9 @@ export type ShowtimeOrderByWithRelationInput = {
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
-  Booking?: Prisma.BookingOrderByRelationAggregateInput
+  BookingDetail?: Prisma.BookingDetailOrderByRelationAggregateInput
+  Screens?: Prisma.ScreensOrderByWithRelationInput
+  Movies?: Prisma.MoviesOrderByWithRelationInput
 }
 
 export type ShowtimeWhereUniqueInput = Prisma.AtLeast<{
@@ -279,7 +283,9 @@ export type ShowtimeWhereUniqueInput = Prisma.AtLeast<{
   isDeleted?: Prisma.BoolFilter<"Showtime"> | boolean
   createAt?: Prisma.DateTimeFilter<"Showtime"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Showtime"> | Date | string
-  Booking?: Prisma.BookingListRelationFilter
+  BookingDetail?: Prisma.BookingDetailListRelationFilter
+  Screens?: Prisma.XOR<Prisma.ScreensScalarRelationFilter, Prisma.ScreensWhereInput>
+  Movies?: Prisma.XOR<Prisma.MoviesScalarRelationFilter, Prisma.MoviesWhereInput>
 }, "showId">
 
 export type ShowtimeOrderByWithAggregationInput = {
@@ -313,14 +319,14 @@ export type ShowtimeScalarWhereWithAggregatesInput = {
 }
 
 export type ShowtimeCreateInput = {
-  screenId: number
-  movieId: number
   showTime: Date | string
   bookingPrice: number
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
-  Booking?: Prisma.BookingCreateNestedManyWithoutShowtimeInput
+  BookingDetail?: Prisma.BookingDetailCreateNestedManyWithoutShowtimeInput
+  Screens: Prisma.ScreensCreateNestedOneWithoutShowtimeInput
+  Movies: Prisma.MoviesCreateNestedOneWithoutShowtimeInput
 }
 
 export type ShowtimeUncheckedCreateInput = {
@@ -332,18 +338,18 @@ export type ShowtimeUncheckedCreateInput = {
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
-  Booking?: Prisma.BookingUncheckedCreateNestedManyWithoutShowtimeInput
+  BookingDetail?: Prisma.BookingDetailUncheckedCreateNestedManyWithoutShowtimeInput
 }
 
 export type ShowtimeUpdateInput = {
-  screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  movieId?: Prisma.IntFieldUpdateOperationsInput | number
   showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Booking?: Prisma.BookingUpdateManyWithoutShowtimeNestedInput
+  BookingDetail?: Prisma.BookingDetailUpdateManyWithoutShowtimeNestedInput
+  Screens?: Prisma.ScreensUpdateOneRequiredWithoutShowtimeNestedInput
+  Movies?: Prisma.MoviesUpdateOneRequiredWithoutShowtimeNestedInput
 }
 
 export type ShowtimeUncheckedUpdateInput = {
@@ -355,7 +361,7 @@ export type ShowtimeUncheckedUpdateInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Booking?: Prisma.BookingUncheckedUpdateManyWithoutShowtimeNestedInput
+  BookingDetail?: Prisma.BookingDetailUncheckedUpdateManyWithoutShowtimeNestedInput
 }
 
 export type ShowtimeCreateManyInput = {
@@ -370,8 +376,6 @@ export type ShowtimeCreateManyInput = {
 }
 
 export type ShowtimeUpdateManyMutationInput = {
-  screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  movieId?: Prisma.IntFieldUpdateOperationsInput | number
   showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -393,6 +397,16 @@ export type ShowtimeUncheckedUpdateManyInput = {
 export type ShowtimeScalarRelationFilter = {
   is?: Prisma.ShowtimeWhereInput
   isNot?: Prisma.ShowtimeWhereInput
+}
+
+export type ShowtimeListRelationFilter = {
+  every?: Prisma.ShowtimeWhereInput
+  some?: Prisma.ShowtimeWhereInput
+  none?: Prisma.ShowtimeWhereInput
+}
+
+export type ShowtimeOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ShowtimeCountOrderByAggregateInput = {
@@ -442,31 +456,115 @@ export type ShowtimeSumOrderByAggregateInput = {
   bookingPrice?: Prisma.SortOrder
 }
 
-export type ShowtimeCreateNestedOneWithoutBookingInput = {
-  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingInput, Prisma.ShowtimeUncheckedCreateWithoutBookingInput>
-  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutBookingInput
+export type ShowtimeCreateNestedOneWithoutBookingDetailInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingDetailInput, Prisma.ShowtimeUncheckedCreateWithoutBookingDetailInput>
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutBookingDetailInput
   connect?: Prisma.ShowtimeWhereUniqueInput
 }
 
-export type ShowtimeUpdateOneRequiredWithoutBookingNestedInput = {
-  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingInput, Prisma.ShowtimeUncheckedCreateWithoutBookingInput>
-  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutBookingInput
-  upsert?: Prisma.ShowtimeUpsertWithoutBookingInput
+export type ShowtimeUpdateOneRequiredWithoutBookingDetailNestedInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingDetailInput, Prisma.ShowtimeUncheckedCreateWithoutBookingDetailInput>
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutBookingDetailInput
+  upsert?: Prisma.ShowtimeUpsertWithoutBookingDetailInput
   connect?: Prisma.ShowtimeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ShowtimeUpdateToOneWithWhereWithoutBookingInput, Prisma.ShowtimeUpdateWithoutBookingInput>, Prisma.ShowtimeUncheckedUpdateWithoutBookingInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShowtimeUpdateToOneWithWhereWithoutBookingDetailInput, Prisma.ShowtimeUpdateWithoutBookingDetailInput>, Prisma.ShowtimeUncheckedUpdateWithoutBookingDetailInput>
 }
 
-export type ShowtimeCreateWithoutBookingInput = {
-  screenId: number
-  movieId: number
+export type ShowtimeCreateNestedManyWithoutMoviesInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutMoviesInput, Prisma.ShowtimeUncheckedCreateWithoutMoviesInput> | Prisma.ShowtimeCreateWithoutMoviesInput[] | Prisma.ShowtimeUncheckedCreateWithoutMoviesInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutMoviesInput | Prisma.ShowtimeCreateOrConnectWithoutMoviesInput[]
+  createMany?: Prisma.ShowtimeCreateManyMoviesInputEnvelope
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+}
+
+export type ShowtimeUncheckedCreateNestedManyWithoutMoviesInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutMoviesInput, Prisma.ShowtimeUncheckedCreateWithoutMoviesInput> | Prisma.ShowtimeCreateWithoutMoviesInput[] | Prisma.ShowtimeUncheckedCreateWithoutMoviesInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutMoviesInput | Prisma.ShowtimeCreateOrConnectWithoutMoviesInput[]
+  createMany?: Prisma.ShowtimeCreateManyMoviesInputEnvelope
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+}
+
+export type ShowtimeUpdateManyWithoutMoviesNestedInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutMoviesInput, Prisma.ShowtimeUncheckedCreateWithoutMoviesInput> | Prisma.ShowtimeCreateWithoutMoviesInput[] | Prisma.ShowtimeUncheckedCreateWithoutMoviesInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutMoviesInput | Prisma.ShowtimeCreateOrConnectWithoutMoviesInput[]
+  upsert?: Prisma.ShowtimeUpsertWithWhereUniqueWithoutMoviesInput | Prisma.ShowtimeUpsertWithWhereUniqueWithoutMoviesInput[]
+  createMany?: Prisma.ShowtimeCreateManyMoviesInputEnvelope
+  set?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  disconnect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  delete?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  update?: Prisma.ShowtimeUpdateWithWhereUniqueWithoutMoviesInput | Prisma.ShowtimeUpdateWithWhereUniqueWithoutMoviesInput[]
+  updateMany?: Prisma.ShowtimeUpdateManyWithWhereWithoutMoviesInput | Prisma.ShowtimeUpdateManyWithWhereWithoutMoviesInput[]
+  deleteMany?: Prisma.ShowtimeScalarWhereInput | Prisma.ShowtimeScalarWhereInput[]
+}
+
+export type ShowtimeUncheckedUpdateManyWithoutMoviesNestedInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutMoviesInput, Prisma.ShowtimeUncheckedCreateWithoutMoviesInput> | Prisma.ShowtimeCreateWithoutMoviesInput[] | Prisma.ShowtimeUncheckedCreateWithoutMoviesInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutMoviesInput | Prisma.ShowtimeCreateOrConnectWithoutMoviesInput[]
+  upsert?: Prisma.ShowtimeUpsertWithWhereUniqueWithoutMoviesInput | Prisma.ShowtimeUpsertWithWhereUniqueWithoutMoviesInput[]
+  createMany?: Prisma.ShowtimeCreateManyMoviesInputEnvelope
+  set?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  disconnect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  delete?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  update?: Prisma.ShowtimeUpdateWithWhereUniqueWithoutMoviesInput | Prisma.ShowtimeUpdateWithWhereUniqueWithoutMoviesInput[]
+  updateMany?: Prisma.ShowtimeUpdateManyWithWhereWithoutMoviesInput | Prisma.ShowtimeUpdateManyWithWhereWithoutMoviesInput[]
+  deleteMany?: Prisma.ShowtimeScalarWhereInput | Prisma.ShowtimeScalarWhereInput[]
+}
+
+export type ShowtimeCreateNestedManyWithoutScreensInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutScreensInput, Prisma.ShowtimeUncheckedCreateWithoutScreensInput> | Prisma.ShowtimeCreateWithoutScreensInput[] | Prisma.ShowtimeUncheckedCreateWithoutScreensInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutScreensInput | Prisma.ShowtimeCreateOrConnectWithoutScreensInput[]
+  createMany?: Prisma.ShowtimeCreateManyScreensInputEnvelope
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+}
+
+export type ShowtimeUncheckedCreateNestedManyWithoutScreensInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutScreensInput, Prisma.ShowtimeUncheckedCreateWithoutScreensInput> | Prisma.ShowtimeCreateWithoutScreensInput[] | Prisma.ShowtimeUncheckedCreateWithoutScreensInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutScreensInput | Prisma.ShowtimeCreateOrConnectWithoutScreensInput[]
+  createMany?: Prisma.ShowtimeCreateManyScreensInputEnvelope
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+}
+
+export type ShowtimeUpdateManyWithoutScreensNestedInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutScreensInput, Prisma.ShowtimeUncheckedCreateWithoutScreensInput> | Prisma.ShowtimeCreateWithoutScreensInput[] | Prisma.ShowtimeUncheckedCreateWithoutScreensInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutScreensInput | Prisma.ShowtimeCreateOrConnectWithoutScreensInput[]
+  upsert?: Prisma.ShowtimeUpsertWithWhereUniqueWithoutScreensInput | Prisma.ShowtimeUpsertWithWhereUniqueWithoutScreensInput[]
+  createMany?: Prisma.ShowtimeCreateManyScreensInputEnvelope
+  set?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  disconnect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  delete?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  update?: Prisma.ShowtimeUpdateWithWhereUniqueWithoutScreensInput | Prisma.ShowtimeUpdateWithWhereUniqueWithoutScreensInput[]
+  updateMany?: Prisma.ShowtimeUpdateManyWithWhereWithoutScreensInput | Prisma.ShowtimeUpdateManyWithWhereWithoutScreensInput[]
+  deleteMany?: Prisma.ShowtimeScalarWhereInput | Prisma.ShowtimeScalarWhereInput[]
+}
+
+export type ShowtimeUncheckedUpdateManyWithoutScreensNestedInput = {
+  create?: Prisma.XOR<Prisma.ShowtimeCreateWithoutScreensInput, Prisma.ShowtimeUncheckedCreateWithoutScreensInput> | Prisma.ShowtimeCreateWithoutScreensInput[] | Prisma.ShowtimeUncheckedCreateWithoutScreensInput[]
+  connectOrCreate?: Prisma.ShowtimeCreateOrConnectWithoutScreensInput | Prisma.ShowtimeCreateOrConnectWithoutScreensInput[]
+  upsert?: Prisma.ShowtimeUpsertWithWhereUniqueWithoutScreensInput | Prisma.ShowtimeUpsertWithWhereUniqueWithoutScreensInput[]
+  createMany?: Prisma.ShowtimeCreateManyScreensInputEnvelope
+  set?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  disconnect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  delete?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  connect?: Prisma.ShowtimeWhereUniqueInput | Prisma.ShowtimeWhereUniqueInput[]
+  update?: Prisma.ShowtimeUpdateWithWhereUniqueWithoutScreensInput | Prisma.ShowtimeUpdateWithWhereUniqueWithoutScreensInput[]
+  updateMany?: Prisma.ShowtimeUpdateManyWithWhereWithoutScreensInput | Prisma.ShowtimeUpdateManyWithWhereWithoutScreensInput[]
+  deleteMany?: Prisma.ShowtimeScalarWhereInput | Prisma.ShowtimeScalarWhereInput[]
+}
+
+export type ShowtimeCreateWithoutBookingDetailInput = {
   showTime: Date | string
   bookingPrice: number
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
+  Screens: Prisma.ScreensCreateNestedOneWithoutShowtimeInput
+  Movies: Prisma.MoviesCreateNestedOneWithoutShowtimeInput
 }
 
-export type ShowtimeUncheckedCreateWithoutBookingInput = {
+export type ShowtimeUncheckedCreateWithoutBookingDetailInput = {
   showId?: number
   screenId: number
   movieId: number
@@ -477,23 +575,34 @@ export type ShowtimeUncheckedCreateWithoutBookingInput = {
   updateAt?: Date | string
 }
 
-export type ShowtimeCreateOrConnectWithoutBookingInput = {
+export type ShowtimeCreateOrConnectWithoutBookingDetailInput = {
   where: Prisma.ShowtimeWhereUniqueInput
-  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingInput, Prisma.ShowtimeUncheckedCreateWithoutBookingInput>
+  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingDetailInput, Prisma.ShowtimeUncheckedCreateWithoutBookingDetailInput>
 }
 
-export type ShowtimeUpsertWithoutBookingInput = {
-  update: Prisma.XOR<Prisma.ShowtimeUpdateWithoutBookingInput, Prisma.ShowtimeUncheckedUpdateWithoutBookingInput>
-  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingInput, Prisma.ShowtimeUncheckedCreateWithoutBookingInput>
+export type ShowtimeUpsertWithoutBookingDetailInput = {
+  update: Prisma.XOR<Prisma.ShowtimeUpdateWithoutBookingDetailInput, Prisma.ShowtimeUncheckedUpdateWithoutBookingDetailInput>
+  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutBookingDetailInput, Prisma.ShowtimeUncheckedCreateWithoutBookingDetailInput>
   where?: Prisma.ShowtimeWhereInput
 }
 
-export type ShowtimeUpdateToOneWithWhereWithoutBookingInput = {
+export type ShowtimeUpdateToOneWithWhereWithoutBookingDetailInput = {
   where?: Prisma.ShowtimeWhereInput
-  data: Prisma.XOR<Prisma.ShowtimeUpdateWithoutBookingInput, Prisma.ShowtimeUncheckedUpdateWithoutBookingInput>
+  data: Prisma.XOR<Prisma.ShowtimeUpdateWithoutBookingDetailInput, Prisma.ShowtimeUncheckedUpdateWithoutBookingDetailInput>
 }
 
-export type ShowtimeUpdateWithoutBookingInput = {
+export type ShowtimeUpdateWithoutBookingDetailInput = {
+  showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Screens?: Prisma.ScreensUpdateOneRequiredWithoutShowtimeNestedInput
+  Movies?: Prisma.MoviesUpdateOneRequiredWithoutShowtimeNestedInput
+}
+
+export type ShowtimeUncheckedUpdateWithoutBookingDetailInput = {
+  showId?: Prisma.IntFieldUpdateOperationsInput | number
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
   movieId?: Prisma.IntFieldUpdateOperationsInput | number
   showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -503,9 +612,188 @@ export type ShowtimeUpdateWithoutBookingInput = {
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ShowtimeUncheckedUpdateWithoutBookingInput = {
+export type ShowtimeCreateWithoutMoviesInput = {
+  showTime: Date | string
+  bookingPrice: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  BookingDetail?: Prisma.BookingDetailCreateNestedManyWithoutShowtimeInput
+  Screens: Prisma.ScreensCreateNestedOneWithoutShowtimeInput
+}
+
+export type ShowtimeUncheckedCreateWithoutMoviesInput = {
+  showId?: number
+  screenId: number
+  showTime: Date | string
+  bookingPrice: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  BookingDetail?: Prisma.BookingDetailUncheckedCreateNestedManyWithoutShowtimeInput
+}
+
+export type ShowtimeCreateOrConnectWithoutMoviesInput = {
+  where: Prisma.ShowtimeWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutMoviesInput, Prisma.ShowtimeUncheckedCreateWithoutMoviesInput>
+}
+
+export type ShowtimeCreateManyMoviesInputEnvelope = {
+  data: Prisma.ShowtimeCreateManyMoviesInput | Prisma.ShowtimeCreateManyMoviesInput[]
+  skipDuplicates?: boolean
+}
+
+export type ShowtimeUpsertWithWhereUniqueWithoutMoviesInput = {
+  where: Prisma.ShowtimeWhereUniqueInput
+  update: Prisma.XOR<Prisma.ShowtimeUpdateWithoutMoviesInput, Prisma.ShowtimeUncheckedUpdateWithoutMoviesInput>
+  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutMoviesInput, Prisma.ShowtimeUncheckedCreateWithoutMoviesInput>
+}
+
+export type ShowtimeUpdateWithWhereUniqueWithoutMoviesInput = {
+  where: Prisma.ShowtimeWhereUniqueInput
+  data: Prisma.XOR<Prisma.ShowtimeUpdateWithoutMoviesInput, Prisma.ShowtimeUncheckedUpdateWithoutMoviesInput>
+}
+
+export type ShowtimeUpdateManyWithWhereWithoutMoviesInput = {
+  where: Prisma.ShowtimeScalarWhereInput
+  data: Prisma.XOR<Prisma.ShowtimeUpdateManyMutationInput, Prisma.ShowtimeUncheckedUpdateManyWithoutMoviesInput>
+}
+
+export type ShowtimeScalarWhereInput = {
+  AND?: Prisma.ShowtimeScalarWhereInput | Prisma.ShowtimeScalarWhereInput[]
+  OR?: Prisma.ShowtimeScalarWhereInput[]
+  NOT?: Prisma.ShowtimeScalarWhereInput | Prisma.ShowtimeScalarWhereInput[]
+  showId?: Prisma.IntFilter<"Showtime"> | number
+  screenId?: Prisma.IntFilter<"Showtime"> | number
+  movieId?: Prisma.IntFilter<"Showtime"> | number
+  showTime?: Prisma.DateTimeFilter<"Showtime"> | Date | string
+  bookingPrice?: Prisma.IntFilter<"Showtime"> | number
+  isDeleted?: Prisma.BoolFilter<"Showtime"> | boolean
+  createAt?: Prisma.DateTimeFilter<"Showtime"> | Date | string
+  updateAt?: Prisma.DateTimeFilter<"Showtime"> | Date | string
+}
+
+export type ShowtimeCreateWithoutScreensInput = {
+  showTime: Date | string
+  bookingPrice: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  BookingDetail?: Prisma.BookingDetailCreateNestedManyWithoutShowtimeInput
+  Movies: Prisma.MoviesCreateNestedOneWithoutShowtimeInput
+}
+
+export type ShowtimeUncheckedCreateWithoutScreensInput = {
+  showId?: number
+  movieId: number
+  showTime: Date | string
+  bookingPrice: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  BookingDetail?: Prisma.BookingDetailUncheckedCreateNestedManyWithoutShowtimeInput
+}
+
+export type ShowtimeCreateOrConnectWithoutScreensInput = {
+  where: Prisma.ShowtimeWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutScreensInput, Prisma.ShowtimeUncheckedCreateWithoutScreensInput>
+}
+
+export type ShowtimeCreateManyScreensInputEnvelope = {
+  data: Prisma.ShowtimeCreateManyScreensInput | Prisma.ShowtimeCreateManyScreensInput[]
+  skipDuplicates?: boolean
+}
+
+export type ShowtimeUpsertWithWhereUniqueWithoutScreensInput = {
+  where: Prisma.ShowtimeWhereUniqueInput
+  update: Prisma.XOR<Prisma.ShowtimeUpdateWithoutScreensInput, Prisma.ShowtimeUncheckedUpdateWithoutScreensInput>
+  create: Prisma.XOR<Prisma.ShowtimeCreateWithoutScreensInput, Prisma.ShowtimeUncheckedCreateWithoutScreensInput>
+}
+
+export type ShowtimeUpdateWithWhereUniqueWithoutScreensInput = {
+  where: Prisma.ShowtimeWhereUniqueInput
+  data: Prisma.XOR<Prisma.ShowtimeUpdateWithoutScreensInput, Prisma.ShowtimeUncheckedUpdateWithoutScreensInput>
+}
+
+export type ShowtimeUpdateManyWithWhereWithoutScreensInput = {
+  where: Prisma.ShowtimeScalarWhereInput
+  data: Prisma.XOR<Prisma.ShowtimeUpdateManyMutationInput, Prisma.ShowtimeUncheckedUpdateManyWithoutScreensInput>
+}
+
+export type ShowtimeCreateManyMoviesInput = {
+  showId?: number
+  screenId: number
+  showTime: Date | string
+  bookingPrice: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+}
+
+export type ShowtimeUpdateWithoutMoviesInput = {
+  showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  BookingDetail?: Prisma.BookingDetailUpdateManyWithoutShowtimeNestedInput
+  Screens?: Prisma.ScreensUpdateOneRequiredWithoutShowtimeNestedInput
+}
+
+export type ShowtimeUncheckedUpdateWithoutMoviesInput = {
   showId?: Prisma.IntFieldUpdateOperationsInput | number
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
+  showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  BookingDetail?: Prisma.BookingDetailUncheckedUpdateManyWithoutShowtimeNestedInput
+}
+
+export type ShowtimeUncheckedUpdateManyWithoutMoviesInput = {
+  showId?: Prisma.IntFieldUpdateOperationsInput | number
+  screenId?: Prisma.IntFieldUpdateOperationsInput | number
+  showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ShowtimeCreateManyScreensInput = {
+  showId?: number
+  movieId: number
+  showTime: Date | string
+  bookingPrice: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+}
+
+export type ShowtimeUpdateWithoutScreensInput = {
+  showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  BookingDetail?: Prisma.BookingDetailUpdateManyWithoutShowtimeNestedInput
+  Movies?: Prisma.MoviesUpdateOneRequiredWithoutShowtimeNestedInput
+}
+
+export type ShowtimeUncheckedUpdateWithoutScreensInput = {
+  showId?: Prisma.IntFieldUpdateOperationsInput | number
+  movieId?: Prisma.IntFieldUpdateOperationsInput | number
+  showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  BookingDetail?: Prisma.BookingDetailUncheckedUpdateManyWithoutShowtimeNestedInput
+}
+
+export type ShowtimeUncheckedUpdateManyWithoutScreensInput = {
+  showId?: Prisma.IntFieldUpdateOperationsInput | number
   movieId?: Prisma.IntFieldUpdateOperationsInput | number
   showTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -520,11 +808,11 @@ export type ShowtimeUncheckedUpdateWithoutBookingInput = {
  */
 
 export type ShowtimeCountOutputType = {
-  Booking: number
+  BookingDetail: number
 }
 
 export type ShowtimeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Booking?: boolean | ShowtimeCountOutputTypeCountBookingArgs
+  BookingDetail?: boolean | ShowtimeCountOutputTypeCountBookingDetailArgs
 }
 
 /**
@@ -540,8 +828,8 @@ export type ShowtimeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * ShowtimeCountOutputType without action
  */
-export type ShowtimeCountOutputTypeCountBookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BookingWhereInput
+export type ShowtimeCountOutputTypeCountBookingDetailArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingDetailWhereInput
 }
 
 
@@ -554,7 +842,9 @@ export type ShowtimeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   isDeleted?: boolean
   createAt?: boolean
   updateAt?: boolean
-  Booking?: boolean | Prisma.Showtime$BookingArgs<ExtArgs>
+  BookingDetail?: boolean | Prisma.Showtime$BookingDetailArgs<ExtArgs>
+  Screens?: boolean | Prisma.ScreensDefaultArgs<ExtArgs>
+  Movies?: boolean | Prisma.MoviesDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShowtimeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["showtime"]>
 
@@ -573,14 +863,18 @@ export type ShowtimeSelectScalar = {
 
 export type ShowtimeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"showId" | "screenId" | "movieId" | "showTime" | "bookingPrice" | "isDeleted" | "createAt" | "updateAt", ExtArgs["result"]["showtime"]>
 export type ShowtimeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Booking?: boolean | Prisma.Showtime$BookingArgs<ExtArgs>
+  BookingDetail?: boolean | Prisma.Showtime$BookingDetailArgs<ExtArgs>
+  Screens?: boolean | Prisma.ScreensDefaultArgs<ExtArgs>
+  Movies?: boolean | Prisma.MoviesDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShowtimeCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $ShowtimePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Showtime"
   objects: {
-    Booking: Prisma.$BookingPayload<ExtArgs>[]
+    BookingDetail: Prisma.$BookingDetailPayload<ExtArgs>[]
+    Screens: Prisma.$ScreensPayload<ExtArgs>
+    Movies: Prisma.$MoviesPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     showId: number
@@ -931,7 +1225,9 @@ readonly fields: ShowtimeFieldRefs;
  */
 export interface Prisma__ShowtimeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Booking<T extends Prisma.Showtime$BookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Showtime$BookingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  BookingDetail<T extends Prisma.Showtime$BookingDetailArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Showtime$BookingDetailArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Screens<T extends Prisma.ScreensDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ScreensDefaultArgs<ExtArgs>>): Prisma.Prisma__ScreensClient<runtime.Types.Result.GetResult<Prisma.$ScreensPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  Movies<T extends Prisma.MoviesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MoviesDefaultArgs<ExtArgs>>): Prisma.Prisma__MoviesClient<runtime.Types.Result.GetResult<Prisma.$MoviesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1312,27 +1608,27 @@ export type ShowtimeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Showtime.Booking
+ * Showtime.BookingDetail
  */
-export type Showtime$BookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Showtime$BookingDetailArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Booking
+   * Select specific fields to fetch from the BookingDetail
    */
-  select?: Prisma.BookingSelect<ExtArgs> | null
+  select?: Prisma.BookingDetailSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Booking
+   * Omit specific fields from the BookingDetail
    */
-  omit?: Prisma.BookingOmit<ExtArgs> | null
+  omit?: Prisma.BookingDetailOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BookingInclude<ExtArgs> | null
-  where?: Prisma.BookingWhereInput
-  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
-  cursor?: Prisma.BookingWhereUniqueInput
+  include?: Prisma.BookingDetailInclude<ExtArgs> | null
+  where?: Prisma.BookingDetailWhereInput
+  orderBy?: Prisma.BookingDetailOrderByWithRelationInput | Prisma.BookingDetailOrderByWithRelationInput[]
+  cursor?: Prisma.BookingDetailWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
+  distinct?: Prisma.BookingDetailScalarFieldEnum | Prisma.BookingDetailScalarFieldEnum[]
 }
 
 /**

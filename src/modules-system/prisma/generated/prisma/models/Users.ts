@@ -205,11 +205,11 @@ export type UsersGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type UsersGroupByOutputType = {
   userId: number
-  userFullname: string
+  userFullname: string | null
   userEmail: string
   userPhone: string | null
   userPassword: string
-  userType: string
+  userType: string | null
   isDeleted: boolean
   createAt: Date
   updateAt: Date
@@ -240,28 +240,26 @@ export type UsersWhereInput = {
   OR?: Prisma.UsersWhereInput[]
   NOT?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
   userId?: Prisma.IntFilter<"Users"> | number
-  userFullname?: Prisma.StringFilter<"Users"> | string
+  userFullname?: Prisma.StringNullableFilter<"Users"> | string | null
   userEmail?: Prisma.StringFilter<"Users"> | string
   userPhone?: Prisma.StringNullableFilter<"Users"> | string | null
   userPassword?: Prisma.StringFilter<"Users"> | string
-  userType?: Prisma.StringFilter<"Users"> | string
+  userType?: Prisma.StringNullableFilter<"Users"> | string | null
   isDeleted?: Prisma.BoolFilter<"Users"> | boolean
   createAt?: Prisma.DateTimeFilter<"Users"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Users"> | Date | string
-  Booking?: Prisma.BookingListRelationFilter
 }
 
 export type UsersOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
-  userFullname?: Prisma.SortOrder
+  userFullname?: Prisma.SortOrderInput | Prisma.SortOrder
   userEmail?: Prisma.SortOrder
   userPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   userPassword?: Prisma.SortOrder
-  userType?: Prisma.SortOrder
+  userType?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
-  Booking?: Prisma.BookingOrderByRelationAggregateInput
   _relevance?: Prisma.UsersOrderByRelevanceInput
 }
 
@@ -271,23 +269,22 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
   OR?: Prisma.UsersWhereInput[]
   NOT?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
-  userFullname?: Prisma.StringFilter<"Users"> | string
+  userFullname?: Prisma.StringNullableFilter<"Users"> | string | null
   userPhone?: Prisma.StringNullableFilter<"Users"> | string | null
   userPassword?: Prisma.StringFilter<"Users"> | string
-  userType?: Prisma.StringFilter<"Users"> | string
+  userType?: Prisma.StringNullableFilter<"Users"> | string | null
   isDeleted?: Prisma.BoolFilter<"Users"> | boolean
   createAt?: Prisma.DateTimeFilter<"Users"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Users"> | Date | string
-  Booking?: Prisma.BookingListRelationFilter
 }, "userId" | "userEmail">
 
 export type UsersOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
-  userFullname?: Prisma.SortOrder
+  userFullname?: Prisma.SortOrderInput | Prisma.SortOrder
   userEmail?: Prisma.SortOrder
   userPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   userPassword?: Prisma.SortOrder
-  userType?: Prisma.SortOrder
+  userType?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
@@ -303,84 +300,80 @@ export type UsersScalarWhereWithAggregatesInput = {
   OR?: Prisma.UsersScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UsersScalarWhereWithAggregatesInput | Prisma.UsersScalarWhereWithAggregatesInput[]
   userId?: Prisma.IntWithAggregatesFilter<"Users"> | number
-  userFullname?: Prisma.StringWithAggregatesFilter<"Users"> | string
+  userFullname?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   userEmail?: Prisma.StringWithAggregatesFilter<"Users"> | string
   userPhone?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   userPassword?: Prisma.StringWithAggregatesFilter<"Users"> | string
-  userType?: Prisma.StringWithAggregatesFilter<"Users"> | string
+  userType?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Users"> | boolean
   createAt?: Prisma.DateTimeWithAggregatesFilter<"Users"> | Date | string
   updateAt?: Prisma.DateTimeWithAggregatesFilter<"Users"> | Date | string
 }
 
 export type UsersCreateInput = {
-  userFullname: string
+  userFullname?: string | null
   userEmail: string
   userPhone?: string | null
   userPassword: string
-  userType: string
+  userType?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
-  Booking?: Prisma.BookingCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUncheckedCreateInput = {
   userId?: number
-  userFullname: string
+  userFullname?: string | null
   userEmail: string
   userPhone?: string | null
   userPassword: string
-  userType: string
+  userType?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
-  Booking?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUpdateInput = {
-  userFullname?: Prisma.StringFieldUpdateOperationsInput | string
+  userFullname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userEmail?: Prisma.StringFieldUpdateOperationsInput | string
   userPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userPassword?: Prisma.StringFieldUpdateOperationsInput | string
-  userType?: Prisma.StringFieldUpdateOperationsInput | string
+  userType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Booking?: Prisma.BookingUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  userFullname?: Prisma.StringFieldUpdateOperationsInput | string
+  userFullname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userEmail?: Prisma.StringFieldUpdateOperationsInput | string
   userPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userPassword?: Prisma.StringFieldUpdateOperationsInput | string
-  userType?: Prisma.StringFieldUpdateOperationsInput | string
+  userType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Booking?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersCreateManyInput = {
   userId?: number
-  userFullname: string
+  userFullname?: string | null
   userEmail: string
   userPhone?: string | null
   userPassword: string
-  userType: string
+  userType?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
 }
 
 export type UsersUpdateManyMutationInput = {
-  userFullname?: Prisma.StringFieldUpdateOperationsInput | string
+  userFullname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userEmail?: Prisma.StringFieldUpdateOperationsInput | string
   userPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userPassword?: Prisma.StringFieldUpdateOperationsInput | string
-  userType?: Prisma.StringFieldUpdateOperationsInput | string
+  userType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -388,19 +381,14 @@ export type UsersUpdateManyMutationInput = {
 
 export type UsersUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  userFullname?: Prisma.StringFieldUpdateOperationsInput | string
+  userFullname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userEmail?: Prisma.StringFieldUpdateOperationsInput | string
   userPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userPassword?: Prisma.StringFieldUpdateOperationsInput | string
-  userType?: Prisma.StringFieldUpdateOperationsInput | string
+  userType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UsersScalarRelationFilter = {
-  is?: Prisma.UsersWhereInput
-  isNot?: Prisma.UsersWhereInput
 }
 
 export type UsersOrderByRelevanceInput = {
@@ -453,111 +441,6 @@ export type UsersSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
 }
 
-export type UsersCreateNestedOneWithoutBookingInput = {
-  create?: Prisma.XOR<Prisma.UsersCreateWithoutBookingInput, Prisma.UsersUncheckedCreateWithoutBookingInput>
-  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutBookingInput
-  connect?: Prisma.UsersWhereUniqueInput
-}
-
-export type UsersUpdateOneRequiredWithoutBookingNestedInput = {
-  create?: Prisma.XOR<Prisma.UsersCreateWithoutBookingInput, Prisma.UsersUncheckedCreateWithoutBookingInput>
-  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutBookingInput
-  upsert?: Prisma.UsersUpsertWithoutBookingInput
-  connect?: Prisma.UsersWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutBookingInput, Prisma.UsersUpdateWithoutBookingInput>, Prisma.UsersUncheckedUpdateWithoutBookingInput>
-}
-
-export type UsersCreateWithoutBookingInput = {
-  userFullname: string
-  userEmail: string
-  userPhone?: string | null
-  userPassword: string
-  userType: string
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
-}
-
-export type UsersUncheckedCreateWithoutBookingInput = {
-  userId?: number
-  userFullname: string
-  userEmail: string
-  userPhone?: string | null
-  userPassword: string
-  userType: string
-  isDeleted?: boolean
-  createAt?: Date | string
-  updateAt?: Date | string
-}
-
-export type UsersCreateOrConnectWithoutBookingInput = {
-  where: Prisma.UsersWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsersCreateWithoutBookingInput, Prisma.UsersUncheckedCreateWithoutBookingInput>
-}
-
-export type UsersUpsertWithoutBookingInput = {
-  update: Prisma.XOR<Prisma.UsersUpdateWithoutBookingInput, Prisma.UsersUncheckedUpdateWithoutBookingInput>
-  create: Prisma.XOR<Prisma.UsersCreateWithoutBookingInput, Prisma.UsersUncheckedCreateWithoutBookingInput>
-  where?: Prisma.UsersWhereInput
-}
-
-export type UsersUpdateToOneWithWhereWithoutBookingInput = {
-  where?: Prisma.UsersWhereInput
-  data: Prisma.XOR<Prisma.UsersUpdateWithoutBookingInput, Prisma.UsersUncheckedUpdateWithoutBookingInput>
-}
-
-export type UsersUpdateWithoutBookingInput = {
-  userFullname?: Prisma.StringFieldUpdateOperationsInput | string
-  userEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  userPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userPassword?: Prisma.StringFieldUpdateOperationsInput | string
-  userType?: Prisma.StringFieldUpdateOperationsInput | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UsersUncheckedUpdateWithoutBookingInput = {
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  userFullname?: Prisma.StringFieldUpdateOperationsInput | string
-  userEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  userPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userPassword?: Prisma.StringFieldUpdateOperationsInput | string
-  userType?: Prisma.StringFieldUpdateOperationsInput | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-
-/**
- * Count Type UsersCountOutputType
- */
-
-export type UsersCountOutputType = {
-  Booking: number
-}
-
-export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Booking?: boolean | UsersCountOutputTypeCountBookingArgs
-}
-
-/**
- * UsersCountOutputType without action
- */
-export type UsersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UsersCountOutputType
-   */
-  select?: Prisma.UsersCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UsersCountOutputType without action
- */
-export type UsersCountOutputTypeCountBookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BookingWhereInput
-}
 
 
 export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -570,8 +453,6 @@ export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   isDeleted?: boolean
   createAt?: boolean
   updateAt?: boolean
-  Booking?: boolean | Prisma.Users$BookingArgs<ExtArgs>
-  _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
 
@@ -589,23 +470,17 @@ export type UsersSelectScalar = {
 }
 
 export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "userFullname" | "userEmail" | "userPhone" | "userPassword" | "userType" | "isDeleted" | "createAt" | "updateAt", ExtArgs["result"]["users"]>
-export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Booking?: boolean | Prisma.Users$BookingArgs<ExtArgs>
-  _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
-}
 
 export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Users"
-  objects: {
-    Booking: Prisma.$BookingPayload<ExtArgs>[]
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: number
-    userFullname: string
+    userFullname: string | null
     userEmail: string
     userPhone: string | null
     userPassword: string
-    userType: string
+    userType: string | null
     isDeleted: boolean
     createAt: Date
     updateAt: Date
@@ -949,7 +824,6 @@ readonly fields: UsersFieldRefs;
  */
 export interface Prisma__UsersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Booking<T extends Prisma.Users$BookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$BookingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1005,10 +879,6 @@ export type UsersFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * Filter, which Users to fetch.
    */
   where: Prisma.UsersWhereUniqueInput
@@ -1027,10 +897,6 @@ export type UsersFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * Filter, which Users to fetch.
    */
   where: Prisma.UsersWhereUniqueInput
@@ -1048,10 +914,6 @@ export type UsersFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Users
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
   /**
    * Filter, which Users to fetch.
    */
@@ -1101,10 +963,6 @@ export type UsersFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * Filter, which Users to fetch.
    */
   where?: Prisma.UsersWhereInput
@@ -1153,10 +1011,6 @@ export type UsersFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * Filter, which Users to fetch.
    */
   where?: Prisma.UsersWhereInput
@@ -1200,10 +1054,6 @@ export type UsersCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * The data needed to create a Users.
    */
   data: Prisma.XOR<Prisma.UsersCreateInput, Prisma.UsersUncheckedCreateInput>
@@ -1232,10 +1082,6 @@ export type UsersUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Users
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
   /**
    * The data needed to update a Users.
    */
@@ -1277,10 +1123,6 @@ export type UsersUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * The filter to search for the Users to update in case it exists.
    */
   where: Prisma.UsersWhereUniqueInput
@@ -1307,10 +1149,6 @@ export type UsersDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
-  /**
    * Filter which Users to delete.
    */
   where: Prisma.UsersWhereUniqueInput
@@ -1331,30 +1169,6 @@ export type UsersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Users.Booking
- */
-export type Users$BookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Booking
-   */
-  select?: Prisma.BookingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Booking
-   */
-  omit?: Prisma.BookingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BookingInclude<ExtArgs> | null
-  where?: Prisma.BookingWhereInput
-  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
-  cursor?: Prisma.BookingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
-}
-
-/**
  * Users without action
  */
 export type UsersDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1366,8 +1180,4 @@ export type UsersDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Users
    */
   omit?: Prisma.UsersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsersInclude<ExtArgs> | null
 }

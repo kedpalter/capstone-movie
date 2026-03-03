@@ -38,18 +38,27 @@ export type BrandsMinAggregateOutputType = {
   brandId: number | null
   brandName: string | null
   brandLogo: string | null
+  isDeleted: boolean | null
+  createAt: Date | null
+  updateAt: Date | null
 }
 
 export type BrandsMaxAggregateOutputType = {
   brandId: number | null
   brandName: string | null
   brandLogo: string | null
+  isDeleted: boolean | null
+  createAt: Date | null
+  updateAt: Date | null
 }
 
 export type BrandsCountAggregateOutputType = {
   brandId: number
   brandName: number
   brandLogo: number
+  isDeleted: number
+  createAt: number
+  updateAt: number
   _all: number
 }
 
@@ -66,18 +75,27 @@ export type BrandsMinAggregateInputType = {
   brandId?: true
   brandName?: true
   brandLogo?: true
+  isDeleted?: true
+  createAt?: true
+  updateAt?: true
 }
 
 export type BrandsMaxAggregateInputType = {
   brandId?: true
   brandName?: true
   brandLogo?: true
+  isDeleted?: true
+  createAt?: true
+  updateAt?: true
 }
 
 export type BrandsCountAggregateInputType = {
   brandId?: true
   brandName?: true
   brandLogo?: true
+  isDeleted?: true
+  createAt?: true
+  updateAt?: true
   _all?: true
 }
 
@@ -169,8 +187,11 @@ export type BrandsGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type BrandsGroupByOutputType = {
   brandId: number
-  brandName: string | null
+  brandName: string
   brandLogo: string | null
+  isDeleted: boolean
+  createAt: Date
+  updateAt: Date
   _count: BrandsCountAggregateOutputType | null
   _avg: BrandsAvgAggregateOutputType | null
   _sum: BrandsSumAggregateOutputType | null
@@ -198,15 +219,21 @@ export type BrandsWhereInput = {
   OR?: Prisma.BrandsWhereInput[]
   NOT?: Prisma.BrandsWhereInput | Prisma.BrandsWhereInput[]
   brandId?: Prisma.IntFilter<"Brands"> | number
-  brandName?: Prisma.StringNullableFilter<"Brands"> | string | null
+  brandName?: Prisma.StringFilter<"Brands"> | string
   brandLogo?: Prisma.StringNullableFilter<"Brands"> | string | null
+  isDeleted?: Prisma.BoolFilter<"Brands"> | boolean
+  createAt?: Prisma.DateTimeFilter<"Brands"> | Date | string
+  updateAt?: Prisma.DateTimeFilter<"Brands"> | Date | string
   Cinemas?: Prisma.CinemasListRelationFilter
 }
 
 export type BrandsOrderByWithRelationInput = {
   brandId?: Prisma.SortOrder
-  brandName?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandName?: Prisma.SortOrder
   brandLogo?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  createAt?: Prisma.SortOrder
+  updateAt?: Prisma.SortOrder
   Cinemas?: Prisma.CinemasOrderByRelationAggregateInput
   _relevance?: Prisma.BrandsOrderByRelevanceInput
 }
@@ -216,15 +243,21 @@ export type BrandsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BrandsWhereInput | Prisma.BrandsWhereInput[]
   OR?: Prisma.BrandsWhereInput[]
   NOT?: Prisma.BrandsWhereInput | Prisma.BrandsWhereInput[]
-  brandName?: Prisma.StringNullableFilter<"Brands"> | string | null
+  brandName?: Prisma.StringFilter<"Brands"> | string
   brandLogo?: Prisma.StringNullableFilter<"Brands"> | string | null
+  isDeleted?: Prisma.BoolFilter<"Brands"> | boolean
+  createAt?: Prisma.DateTimeFilter<"Brands"> | Date | string
+  updateAt?: Prisma.DateTimeFilter<"Brands"> | Date | string
   Cinemas?: Prisma.CinemasListRelationFilter
 }, "brandId">
 
 export type BrandsOrderByWithAggregationInput = {
   brandId?: Prisma.SortOrder
-  brandName?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandName?: Prisma.SortOrder
   brandLogo?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  createAt?: Prisma.SortOrder
+  updateAt?: Prisma.SortOrder
   _count?: Prisma.BrandsCountOrderByAggregateInput
   _avg?: Prisma.BrandsAvgOrderByAggregateInput
   _max?: Prisma.BrandsMaxOrderByAggregateInput
@@ -237,51 +270,75 @@ export type BrandsScalarWhereWithAggregatesInput = {
   OR?: Prisma.BrandsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BrandsScalarWhereWithAggregatesInput | Prisma.BrandsScalarWhereWithAggregatesInput[]
   brandId?: Prisma.IntWithAggregatesFilter<"Brands"> | number
-  brandName?: Prisma.StringNullableWithAggregatesFilter<"Brands"> | string | null
+  brandName?: Prisma.StringWithAggregatesFilter<"Brands"> | string
   brandLogo?: Prisma.StringNullableWithAggregatesFilter<"Brands"> | string | null
+  isDeleted?: Prisma.BoolWithAggregatesFilter<"Brands"> | boolean
+  createAt?: Prisma.DateTimeWithAggregatesFilter<"Brands"> | Date | string
+  updateAt?: Prisma.DateTimeWithAggregatesFilter<"Brands"> | Date | string
 }
 
 export type BrandsCreateInput = {
-  brandName?: string | null
+  brandName: string
   brandLogo?: string | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
   Cinemas?: Prisma.CinemasCreateNestedManyWithoutBrandsInput
 }
 
 export type BrandsUncheckedCreateInput = {
   brandId?: number
-  brandName?: string | null
+  brandName: string
   brandLogo?: string | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
   Cinemas?: Prisma.CinemasUncheckedCreateNestedManyWithoutBrandsInput
 }
 
 export type BrandsUpdateInput = {
-  brandName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandName?: Prisma.StringFieldUpdateOperationsInput | string
   brandLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Cinemas?: Prisma.CinemasUpdateManyWithoutBrandsNestedInput
 }
 
 export type BrandsUncheckedUpdateInput = {
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
-  brandName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandName?: Prisma.StringFieldUpdateOperationsInput | string
   brandLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Cinemas?: Prisma.CinemasUncheckedUpdateManyWithoutBrandsNestedInput
 }
 
 export type BrandsCreateManyInput = {
   brandId?: number
-  brandName?: string | null
+  brandName: string
   brandLogo?: string | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
 }
 
 export type BrandsUpdateManyMutationInput = {
-  brandName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandName?: Prisma.StringFieldUpdateOperationsInput | string
   brandLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandsUncheckedUpdateManyInput = {
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
-  brandName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandName?: Prisma.StringFieldUpdateOperationsInput | string
   brandLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandsOrderByRelevanceInput = {
@@ -294,6 +351,9 @@ export type BrandsCountOrderByAggregateInput = {
   brandId?: Prisma.SortOrder
   brandName?: Prisma.SortOrder
   brandLogo?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  createAt?: Prisma.SortOrder
+  updateAt?: Prisma.SortOrder
 }
 
 export type BrandsAvgOrderByAggregateInput = {
@@ -304,12 +364,18 @@ export type BrandsMaxOrderByAggregateInput = {
   brandId?: Prisma.SortOrder
   brandName?: Prisma.SortOrder
   brandLogo?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  createAt?: Prisma.SortOrder
+  updateAt?: Prisma.SortOrder
 }
 
 export type BrandsMinOrderByAggregateInput = {
   brandId?: Prisma.SortOrder
   brandName?: Prisma.SortOrder
   brandLogo?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  createAt?: Prisma.SortOrder
+  updateAt?: Prisma.SortOrder
 }
 
 export type BrandsSumOrderByAggregateInput = {
@@ -342,14 +408,20 @@ export type BrandsUpdateOneWithoutCinemasNestedInput = {
 }
 
 export type BrandsCreateWithoutCinemasInput = {
-  brandName?: string | null
+  brandName: string
   brandLogo?: string | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
 }
 
 export type BrandsUncheckedCreateWithoutCinemasInput = {
   brandId?: number
-  brandName?: string | null
+  brandName: string
   brandLogo?: string | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
 }
 
 export type BrandsCreateOrConnectWithoutCinemasInput = {
@@ -369,14 +441,20 @@ export type BrandsUpdateToOneWithWhereWithoutCinemasInput = {
 }
 
 export type BrandsUpdateWithoutCinemasInput = {
-  brandName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandName?: Prisma.StringFieldUpdateOperationsInput | string
   brandLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandsUncheckedUpdateWithoutCinemasInput = {
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
-  brandName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandName?: Prisma.StringFieldUpdateOperationsInput | string
   brandLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -414,6 +492,9 @@ export type BrandsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   brandId?: boolean
   brandName?: boolean
   brandLogo?: boolean
+  isDeleted?: boolean
+  createAt?: boolean
+  updateAt?: boolean
   Cinemas?: boolean | Prisma.Brands$CinemasArgs<ExtArgs>
   _count?: boolean | Prisma.BrandsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brands"]>
@@ -424,9 +505,12 @@ export type BrandsSelectScalar = {
   brandId?: boolean
   brandName?: boolean
   brandLogo?: boolean
+  isDeleted?: boolean
+  createAt?: boolean
+  updateAt?: boolean
 }
 
-export type BrandsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"brandId" | "brandName" | "brandLogo", ExtArgs["result"]["brands"]>
+export type BrandsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"brandId" | "brandName" | "brandLogo" | "isDeleted" | "createAt" | "updateAt", ExtArgs["result"]["brands"]>
 export type BrandsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Cinemas?: boolean | Prisma.Brands$CinemasArgs<ExtArgs>
   _count?: boolean | Prisma.BrandsCountOutputTypeDefaultArgs<ExtArgs>
@@ -439,8 +523,11 @@ export type $BrandsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     brandId: number
-    brandName: string | null
+    brandName: string
     brandLogo: string | null
+    isDeleted: boolean
+    createAt: Date
+    updateAt: Date
   }, ExtArgs["result"]["brands"]>
   composites: {}
 }
@@ -814,6 +901,9 @@ export interface BrandsFieldRefs {
   readonly brandId: Prisma.FieldRef<"Brands", 'Int'>
   readonly brandName: Prisma.FieldRef<"Brands", 'String'>
   readonly brandLogo: Prisma.FieldRef<"Brands", 'String'>
+  readonly isDeleted: Prisma.FieldRef<"Brands", 'Boolean'>
+  readonly createAt: Prisma.FieldRef<"Brands", 'DateTime'>
+  readonly updateAt: Prisma.FieldRef<"Brands", 'DateTime'>
 }
     
 
@@ -1032,7 +1122,7 @@ export type BrandsCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   /**
    * The data needed to create a Brands.
    */
-  data?: Prisma.XOR<Prisma.BrandsCreateInput, Prisma.BrandsUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.BrandsCreateInput, Prisma.BrandsUncheckedCreateInput>
 }
 
 /**

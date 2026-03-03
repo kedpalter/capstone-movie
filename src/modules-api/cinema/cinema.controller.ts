@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Delete, Query, UseGuards } from '@nestjs/common';
 import { Role } from 'src/common/decorators/roles.decorator';
 import { ProtectGuard } from 'src/common/guards/protect.guard';
 import { RoleGuard } from 'src/common/guards/role.guard';
@@ -10,47 +10,132 @@ import { CreateShowtimeDto } from './dto/create-showtime.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
 import { UpdateShowtimeDto } from './dto/update-showtime.dto';
 import { Public } from 'src/common/decorators/public.decorator';
+import { UpdateScreenDto } from './dto/update-screen.dto';
 
+@UseGuards(ProtectGuard, RoleGuard)
 @Controller('cinema')
 export class CinemaController {
   constructor(private readonly cinemaService: CinemaService) { }
 
-  // GET Brands
-  @UseGuards(ProtectGuard, RoleGuard)
+  // 1. GET Brands
   @Public()
   @Get('all-brands')
   findAllBrands() {
     return this.cinemaService.findAllBrands();
   }
 
-  // GET Brand Detail
+  // 2. GET Brand Detail (get Cinema By BrandId)
   @Public()
-  @Get('brand')
-  getBrandDetail(@Query('name') name: string) {
-    return this.cinemaService.getBrandDetail(name);
+  @Get('')
+  getBrandDetail(
+    @Query('brandId')
+    brandId: string,
+    @Query('page')
+    page?: string,
+    @Query('pageSize')
+    pageSize?: string
+  ) {
+    return this.cinemaService.getBrandDetail(+brandId,
+      page ? +page : undefined,
+      pageSize ? +pageSize : undefined);
   }
 
-  // GET Cinemas
+  // 3. GET Showtime By Brand
+  @Get('showtimeByBrand')
   @Public()
-  @Get('all-cinemas')
-  findAllCinemas() {
-    return this.cinemaService.findAllCinemas();
+  getShowtimeByBrand(
+    @Query('brandId')
+    brandId: string
+  ) {
+    return this.cinemaService.getShowtimeByBrand(+brandId)
   }
 
-  // GET Cinema detail
-  // @Get(':cinemaId')
-  // findCinemaDetail(@Param('cinemaId') cinemaId: string) {
-  //   return this.cinemaService.findCinemaDetail(+cinemaId)
-  // }
+  // 4. GET Showtime By Cinema
+  @Get('showtimeByCinema')
+  @Public()
+  getShowtimeByCinema(
+    @Query('cinemaId')
+    cinemaId: string
+  ) {
+    return this.cinemaService.getShowtimeByCinema(+cinemaId)
+  }
 
-  // POST Add Cinema
+  // 5. GET Showtime By Movie
+  @Get('showtimeByMovie')
+  @Public()
+  getShowtimeByMovie(
+    @Query('movieId')
+    movieId: string
+  ) {
+    return this.cinemaService.getShowtimeByMovie(+movieId)
+  }
+
+  // 6. GET Seat list
+  @Get('seat-list')
+  @Public()
+  getSeats(
+    @Query('cinemaId')
+    cinemaId?: string,
+    @Query('screenId')
+    screenId?: string
+  ) {
+    return this.cinemaService.getSeats(
+      cinemaId ? +cinemaId : undefined,
+      screenId ? +screenId : undefined)
+  }
+
+  // 7. POST Add Showtime
+  @Post('add-showtime')
+  @Role('admin')
+  addShowtime(
+    @Body()
+    addShowtimeDto: CreateShowtimeDto
+  ) {
+    return this.cinemaService.addShowtime(addShowtimeDto)
+  }
+
+  // 8. PUT Edit Showtime
+  @Put('edit-showtime')
+  @Role('admin')
+  updateShowtime(
+    @Query('showtimeId')
+    showtimeId: string,
+    @Body()
+    updateShowtimeDto: UpdateShowtimeDto
+  ) {
+    return this.cinemaService.updateShowtime(+showtimeId, updateShowtimeDto)
+  }
+
+  // 9. DELETE Showtime
+  @Delete('delete-showtime')
+  @Role('admin')
+  deleteShowtime(
+    @Query('showtimeId')
+    showtimeId: string
+  ) {
+    return this.cinemaService.deleteShowtime(+showtimeId)
+  }
+
+  // 10. POST Add Cinema
   @Post('add-cinema')
-  addCinema(@Body() createCinemaDto: CreateCinemaDto) {
+  @Role('admin')
+  addCinema(
+    @Body()
+    createCinemaDto: CreateCinemaDto
+  ) {
     return this.cinemaService.addCinema(createCinemaDto);
   }
 
-  // PUT Edit Cinema
+  // 11. GET Cinema detail
+  @Get(':id')
+  @Public()
+  findCinemaDetail(@Param('id') cinemaId: string) {
+    return this.cinemaService.findCinemaDetail(+cinemaId)
+  }
+
+  // 12. PUT Edit Cinema
   @Put(':id')
+  @Role('admin')
   updateCinema(
     @Param('id')
     id: string,
@@ -60,66 +145,66 @@ export class CinemaController {
     return this.cinemaService.updateCinema(+id, updateCinemaDto);
   }
 
-  // POST Add Screen
-  @Post('add-screen')
-  addScreen(
+  // 13. DELETE Cinema
+  @Delete('delete-cinema')
+  @Role('admin')
+  deleteCinema(
     @Query('cinemaId')
-    cinemaId: string,
+    id: string
+  ) {
+    return this.cinemaService.deleteCinema(+id)
+  }
+
+  // 14. POST Add Screen
+  @Post('add-screen')
+  @Role('admin')
+  addScreen(
     @Body()
     createSceenDto: CreateScreenDto
   ) {
-    return this.cinemaService.addScreen(+cinemaId, createSceenDto)
+    return this.cinemaService.addScreen(createSceenDto)
   }
 
-  // GET Seat list
-  @Get(':id/seat-list')
-  getSeats(
-    @Param('id')
-    cinemaId: string,
-    @Query('screenId')
-    screenId: string
-  ) {
-    return this.cinemaService.getSeats(+cinemaId, +screenId)
-  }
-
-  // POST Add Seat
-  @Post(':id/add-seat')
-  addSeat(
-    @Param('id')
-    cinemaId: string,
+  // 15. PUT Edit Screen
+  @Put('edit-screen')
+  @Role('admin')
+  updateScreen(
     @Query('screenId')
     screenId: string,
     @Body()
-    addSeatDto: CreateSeatDto
+    updateScreenDto: UpdateScreenDto
   ) {
-    return this.cinemaService.addSeat(+cinemaId, +screenId, addSeatDto)
+    return this.cinemaService.updateScreen(+screenId, updateScreenDto)
   }
 
-  // GET Showtime
-  @Get('show-time')
-  getShowtime(
+  // 16. DELETE Screen
+  @Delete('delete-screen')
+  @Role('admin')
+  deleteScreen(
     @Query('screenId')
     screenId: string
   ) {
-    return this.cinemaService.getShowtime(+screenId)
+    return this.cinemaService.deleteScreen(+screenId)
   }
 
-  // POST Add Showtime
-  @Post('add-showtime')
-  addShowtime(
+  // 17. POST Add Seat
+  @Post('add-seat')
+  @Role('admin')
+  addSeat(
     @Body()
-    addShowtimeDto: CreateShowtimeDto
+    createSeatDto: CreateSeatDto
   ) {
-    return this.cinemaService.addShowtime(addShowtimeDto)
+    return this.cinemaService.addSeat(createSeatDto)
   }
 
-  @Put('edit-showtime')
-  updateShowtime(
-    @Query('showtimeId')
-    showtimeId: string,
-    @Body()
-    updateShowtimeDto: UpdateShowtimeDto
+  // 18. DELETE Seat
+  @Delete('delete-seat')
+  @Role('admin')
+  deleteSeat(
+    @Query('seatId')
+    seatId: string
   ) {
-    return this.cinemaService.updateShowtime(+showtimeId, updateShowtimeDto)
+    return this.cinemaService.deleteSeat(+seatId)
   }
+
 }

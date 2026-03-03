@@ -22,7 +22,7 @@ export class TokenService {
 
     verifyRefreshToken(refreshToken: any) {
         const decode = jsonwebtoken.verify(refreshToken,
-            ACCESS_TOKEN_SECRET as string)
+            REFRESH_TOKEN_SECRET as string)
         return decode
     }
 }

@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
 import { BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { UpdateBookingDto } from './dto/update-booking.dto';
 
 @Controller('booking')
 export class BookingController {
-  constructor(private readonly bookingService: BookingService) {}
+  constructor(private readonly bookingService: BookingService) { }
 
-  @Post()
-  bookingFilm(@Body() createBookingDto: CreateBookingDto) {
-    return this.bookingService.bookingFilm(createBookingDto);
+  // 1. Check Slot
+  @Get('avail-seats')
+  getAvailSeats(
+    @Query('showtimeId')
+    showtimeId: string
+  ) {
+    return this.bookingService.getAvailSeats(+showtimeId)
   }
 
-  @Get()
-  findAll() {
-    return this.bookingService.findAll();
+  // 2. Book tickets
+  @Post('buy-tickets')
+  bookingMovie(
+    @Req()
+    req: any,
+    @Body()
+    createBookingDto: CreateBookingDto
+  ) {
+    return this.bookingService.bookingMovie(+req.user.userId, createBookingDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bookingService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
-    return this.bookingService.update(+id, updateBookingDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bookingService.remove(+id);
+  // 3. GET Booking List
+  @Get('my-tickets')
+  findBookingList(
+    @Req()
+    req: any
+  ) {
+    return this.bookingService.findBookingList(+req.user.userId);
   }
 }

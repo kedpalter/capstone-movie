@@ -1,6 +1,6 @@
 
 
-export class AddBannerDto {
-    movieId: string;
+export class CreateBannerDto {
+    movieId: number;
     bannerImage: string
 }

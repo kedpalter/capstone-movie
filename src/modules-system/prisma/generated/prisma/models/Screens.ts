@@ -191,7 +191,7 @@ export type ScreensGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type ScreensGroupByOutputType = {
   screenId: number
-  screenName: string
+  screenName: string | null
   cinemaId: number
   isDeleted: boolean
   createAt: Date
@@ -223,24 +223,26 @@ export type ScreensWhereInput = {
   OR?: Prisma.ScreensWhereInput[]
   NOT?: Prisma.ScreensWhereInput | Prisma.ScreensWhereInput[]
   screenId?: Prisma.IntFilter<"Screens"> | number
-  screenName?: Prisma.StringFilter<"Screens"> | string
+  screenName?: Prisma.StringNullableFilter<"Screens"> | string | null
   cinemaId?: Prisma.IntFilter<"Screens"> | number
   isDeleted?: Prisma.BoolFilter<"Screens"> | boolean
   createAt?: Prisma.DateTimeFilter<"Screens"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Screens"> | Date | string
   Cinemas?: Prisma.XOR<Prisma.CinemasScalarRelationFilter, Prisma.CinemasWhereInput>
   Seats?: Prisma.SeatsListRelationFilter
+  Showtime?: Prisma.ShowtimeListRelationFilter
 }
 
 export type ScreensOrderByWithRelationInput = {
   screenId?: Prisma.SortOrder
-  screenName?: Prisma.SortOrder
+  screenName?: Prisma.SortOrderInput | Prisma.SortOrder
   cinemaId?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
   Cinemas?: Prisma.CinemasOrderByWithRelationInput
   Seats?: Prisma.SeatsOrderByRelationAggregateInput
+  Showtime?: Prisma.ShowtimeOrderByRelationAggregateInput
   _relevance?: Prisma.ScreensOrderByRelevanceInput
 }
 
@@ -249,18 +251,19 @@ export type ScreensWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ScreensWhereInput | Prisma.ScreensWhereInput[]
   OR?: Prisma.ScreensWhereInput[]
   NOT?: Prisma.ScreensWhereInput | Prisma.ScreensWhereInput[]
-  screenName?: Prisma.StringFilter<"Screens"> | string
+  screenName?: Prisma.StringNullableFilter<"Screens"> | string | null
   cinemaId?: Prisma.IntFilter<"Screens"> | number
   isDeleted?: Prisma.BoolFilter<"Screens"> | boolean
   createAt?: Prisma.DateTimeFilter<"Screens"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Screens"> | Date | string
   Cinemas?: Prisma.XOR<Prisma.CinemasScalarRelationFilter, Prisma.CinemasWhereInput>
   Seats?: Prisma.SeatsListRelationFilter
+  Showtime?: Prisma.ShowtimeListRelationFilter
 }, "screenId">
 
 export type ScreensOrderByWithAggregationInput = {
   screenId?: Prisma.SortOrder
-  screenName?: Prisma.SortOrder
+  screenName?: Prisma.SortOrderInput | Prisma.SortOrder
   cinemaId?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createAt?: Prisma.SortOrder
@@ -277,7 +280,7 @@ export type ScreensScalarWhereWithAggregatesInput = {
   OR?: Prisma.ScreensScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ScreensScalarWhereWithAggregatesInput | Prisma.ScreensScalarWhereWithAggregatesInput[]
   screenId?: Prisma.IntWithAggregatesFilter<"Screens"> | number
-  screenName?: Prisma.StringWithAggregatesFilter<"Screens"> | string
+  screenName?: Prisma.StringNullableWithAggregatesFilter<"Screens"> | string | null
   cinemaId?: Prisma.IntWithAggregatesFilter<"Screens"> | number
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Screens"> | boolean
   createAt?: Prisma.DateTimeWithAggregatesFilter<"Screens"> | Date | string
@@ -285,46 +288,50 @@ export type ScreensScalarWhereWithAggregatesInput = {
 }
 
 export type ScreensCreateInput = {
-  screenName: string
+  screenName?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Cinemas: Prisma.CinemasCreateNestedOneWithoutScreensInput
   Seats?: Prisma.SeatsCreateNestedManyWithoutScreensInput
+  Showtime?: Prisma.ShowtimeCreateNestedManyWithoutScreensInput
 }
 
 export type ScreensUncheckedCreateInput = {
   screenId?: number
-  screenName: string
+  screenName?: string | null
   cinemaId: number
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Seats?: Prisma.SeatsUncheckedCreateNestedManyWithoutScreensInput
+  Showtime?: Prisma.ShowtimeUncheckedCreateNestedManyWithoutScreensInput
 }
 
 export type ScreensUpdateInput = {
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Cinemas?: Prisma.CinemasUpdateOneRequiredWithoutScreensNestedInput
   Seats?: Prisma.SeatsUpdateManyWithoutScreensNestedInput
+  Showtime?: Prisma.ShowtimeUpdateManyWithoutScreensNestedInput
 }
 
 export type ScreensUncheckedUpdateInput = {
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaId?: Prisma.IntFieldUpdateOperationsInput | number
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Seats?: Prisma.SeatsUncheckedUpdateManyWithoutScreensNestedInput
+  Showtime?: Prisma.ShowtimeUncheckedUpdateManyWithoutScreensNestedInput
 }
 
 export type ScreensCreateManyInput = {
   screenId?: number
-  screenName: string
+  screenName?: string | null
   cinemaId: number
   isDeleted?: boolean
   createAt?: Date | string
@@ -332,7 +339,7 @@ export type ScreensCreateManyInput = {
 }
 
 export type ScreensUpdateManyMutationInput = {
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -340,7 +347,7 @@ export type ScreensUpdateManyMutationInput = {
 
 export type ScreensUncheckedUpdateManyInput = {
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaId?: Prisma.IntFieldUpdateOperationsInput | number
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -461,21 +468,37 @@ export type ScreensUpdateOneRequiredWithoutSeatsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ScreensUpdateToOneWithWhereWithoutSeatsInput, Prisma.ScreensUpdateWithoutSeatsInput>, Prisma.ScreensUncheckedUpdateWithoutSeatsInput>
 }
 
+export type ScreensCreateNestedOneWithoutShowtimeInput = {
+  create?: Prisma.XOR<Prisma.ScreensCreateWithoutShowtimeInput, Prisma.ScreensUncheckedCreateWithoutShowtimeInput>
+  connectOrCreate?: Prisma.ScreensCreateOrConnectWithoutShowtimeInput
+  connect?: Prisma.ScreensWhereUniqueInput
+}
+
+export type ScreensUpdateOneRequiredWithoutShowtimeNestedInput = {
+  create?: Prisma.XOR<Prisma.ScreensCreateWithoutShowtimeInput, Prisma.ScreensUncheckedCreateWithoutShowtimeInput>
+  connectOrCreate?: Prisma.ScreensCreateOrConnectWithoutShowtimeInput
+  upsert?: Prisma.ScreensUpsertWithoutShowtimeInput
+  connect?: Prisma.ScreensWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ScreensUpdateToOneWithWhereWithoutShowtimeInput, Prisma.ScreensUpdateWithoutShowtimeInput>, Prisma.ScreensUncheckedUpdateWithoutShowtimeInput>
+}
+
 export type ScreensCreateWithoutCinemasInput = {
-  screenName: string
+  screenName?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Seats?: Prisma.SeatsCreateNestedManyWithoutScreensInput
+  Showtime?: Prisma.ShowtimeCreateNestedManyWithoutScreensInput
 }
 
 export type ScreensUncheckedCreateWithoutCinemasInput = {
   screenId?: number
-  screenName: string
+  screenName?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Seats?: Prisma.SeatsUncheckedCreateNestedManyWithoutScreensInput
+  Showtime?: Prisma.ShowtimeUncheckedCreateNestedManyWithoutScreensInput
 }
 
 export type ScreensCreateOrConnectWithoutCinemasInput = {
@@ -509,7 +532,7 @@ export type ScreensScalarWhereInput = {
   OR?: Prisma.ScreensScalarWhereInput[]
   NOT?: Prisma.ScreensScalarWhereInput | Prisma.ScreensScalarWhereInput[]
   screenId?: Prisma.IntFilter<"Screens"> | number
-  screenName?: Prisma.StringFilter<"Screens"> | string
+  screenName?: Prisma.StringNullableFilter<"Screens"> | string | null
   cinemaId?: Prisma.IntFilter<"Screens"> | number
   isDeleted?: Prisma.BoolFilter<"Screens"> | boolean
   createAt?: Prisma.DateTimeFilter<"Screens"> | Date | string
@@ -517,20 +540,22 @@ export type ScreensScalarWhereInput = {
 }
 
 export type ScreensCreateWithoutSeatsInput = {
-  screenName: string
+  screenName?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
   Cinemas: Prisma.CinemasCreateNestedOneWithoutScreensInput
+  Showtime?: Prisma.ShowtimeCreateNestedManyWithoutScreensInput
 }
 
 export type ScreensUncheckedCreateWithoutSeatsInput = {
   screenId?: number
-  screenName: string
+  screenName?: string | null
   cinemaId: number
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
+  Showtime?: Prisma.ShowtimeUncheckedCreateNestedManyWithoutScreensInput
 }
 
 export type ScreensCreateOrConnectWithoutSeatsInput = {
@@ -550,50 +575,108 @@ export type ScreensUpdateToOneWithWhereWithoutSeatsInput = {
 }
 
 export type ScreensUpdateWithoutSeatsInput = {
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Cinemas?: Prisma.CinemasUpdateOneRequiredWithoutScreensNestedInput
+  Showtime?: Prisma.ShowtimeUpdateManyWithoutScreensNestedInput
 }
 
 export type ScreensUncheckedUpdateWithoutSeatsInput = {
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cinemaId?: Prisma.IntFieldUpdateOperationsInput | number
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Showtime?: Prisma.ShowtimeUncheckedUpdateManyWithoutScreensNestedInput
 }
 
-export type ScreensCreateManyCinemasInput = {
-  screenId?: number
-  screenName: string
+export type ScreensCreateWithoutShowtimeInput = {
+  screenName?: string | null
   isDeleted?: boolean
   createAt?: Date | string
   updateAt?: Date | string
+  Cinemas: Prisma.CinemasCreateNestedOneWithoutScreensInput
+  Seats?: Prisma.SeatsCreateNestedManyWithoutScreensInput
 }
 
-export type ScreensUpdateWithoutCinemasInput = {
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+export type ScreensUncheckedCreateWithoutShowtimeInput = {
+  screenId?: number
+  screenName?: string | null
+  cinemaId: number
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+  Seats?: Prisma.SeatsUncheckedCreateNestedManyWithoutScreensInput
+}
+
+export type ScreensCreateOrConnectWithoutShowtimeInput = {
+  where: Prisma.ScreensWhereUniqueInput
+  create: Prisma.XOR<Prisma.ScreensCreateWithoutShowtimeInput, Prisma.ScreensUncheckedCreateWithoutShowtimeInput>
+}
+
+export type ScreensUpsertWithoutShowtimeInput = {
+  update: Prisma.XOR<Prisma.ScreensUpdateWithoutShowtimeInput, Prisma.ScreensUncheckedUpdateWithoutShowtimeInput>
+  create: Prisma.XOR<Prisma.ScreensCreateWithoutShowtimeInput, Prisma.ScreensUncheckedCreateWithoutShowtimeInput>
+  where?: Prisma.ScreensWhereInput
+}
+
+export type ScreensUpdateToOneWithWhereWithoutShowtimeInput = {
+  where?: Prisma.ScreensWhereInput
+  data: Prisma.XOR<Prisma.ScreensUpdateWithoutShowtimeInput, Prisma.ScreensUncheckedUpdateWithoutShowtimeInput>
+}
+
+export type ScreensUpdateWithoutShowtimeInput = {
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Cinemas?: Prisma.CinemasUpdateOneRequiredWithoutScreensNestedInput
   Seats?: Prisma.SeatsUpdateManyWithoutScreensNestedInput
 }
 
-export type ScreensUncheckedUpdateWithoutCinemasInput = {
+export type ScreensUncheckedUpdateWithoutShowtimeInput = {
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cinemaId?: Prisma.IntFieldUpdateOperationsInput | number
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Seats?: Prisma.SeatsUncheckedUpdateManyWithoutScreensNestedInput
 }
 
+export type ScreensCreateManyCinemasInput = {
+  screenId?: number
+  screenName?: string | null
+  isDeleted?: boolean
+  createAt?: Date | string
+  updateAt?: Date | string
+}
+
+export type ScreensUpdateWithoutCinemasInput = {
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Seats?: Prisma.SeatsUpdateManyWithoutScreensNestedInput
+  Showtime?: Prisma.ShowtimeUpdateManyWithoutScreensNestedInput
+}
+
+export type ScreensUncheckedUpdateWithoutCinemasInput = {
+  screenId?: Prisma.IntFieldUpdateOperationsInput | number
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Seats?: Prisma.SeatsUncheckedUpdateManyWithoutScreensNestedInput
+  Showtime?: Prisma.ShowtimeUncheckedUpdateManyWithoutScreensNestedInput
+}
+
 export type ScreensUncheckedUpdateManyWithoutCinemasInput = {
   screenId?: Prisma.IntFieldUpdateOperationsInput | number
-  screenName?: Prisma.StringFieldUpdateOperationsInput | string
+  screenName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -606,10 +689,12 @@ export type ScreensUncheckedUpdateManyWithoutCinemasInput = {
 
 export type ScreensCountOutputType = {
   Seats: number
+  Showtime: number
 }
 
 export type ScreensCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Seats?: boolean | ScreensCountOutputTypeCountSeatsArgs
+  Showtime?: boolean | ScreensCountOutputTypeCountShowtimeArgs
 }
 
 /**
@@ -629,6 +714,13 @@ export type ScreensCountOutputTypeCountSeatsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.SeatsWhereInput
 }
 
+/**
+ * ScreensCountOutputType without action
+ */
+export type ScreensCountOutputTypeCountShowtimeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShowtimeWhereInput
+}
+
 
 export type ScreensSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   screenId?: boolean
@@ -639,6 +731,7 @@ export type ScreensSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updateAt?: boolean
   Cinemas?: boolean | Prisma.CinemasDefaultArgs<ExtArgs>
   Seats?: boolean | Prisma.Screens$SeatsArgs<ExtArgs>
+  Showtime?: boolean | Prisma.Screens$ShowtimeArgs<ExtArgs>
   _count?: boolean | Prisma.ScreensCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["screens"]>
 
@@ -657,6 +750,7 @@ export type ScreensOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ScreensInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Cinemas?: boolean | Prisma.CinemasDefaultArgs<ExtArgs>
   Seats?: boolean | Prisma.Screens$SeatsArgs<ExtArgs>
+  Showtime?: boolean | Prisma.Screens$ShowtimeArgs<ExtArgs>
   _count?: boolean | Prisma.ScreensCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -665,10 +759,11 @@ export type $ScreensPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     Cinemas: Prisma.$CinemasPayload<ExtArgs>
     Seats: Prisma.$SeatsPayload<ExtArgs>[]
+    Showtime: Prisma.$ShowtimePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     screenId: number
-    screenName: string
+    screenName: string | null
     cinemaId: number
     isDeleted: boolean
     createAt: Date
@@ -1015,6 +1110,7 @@ export interface Prisma__ScreensClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Cinemas<T extends Prisma.CinemasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CinemasDefaultArgs<ExtArgs>>): Prisma.Prisma__CinemasClient<runtime.Types.Result.GetResult<Prisma.$CinemasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Seats<T extends Prisma.Screens$SeatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Screens$SeatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Showtime<T extends Prisma.Screens$ShowtimeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Screens$ShowtimeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShowtimePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1414,6 +1510,30 @@ export type Screens$SeatsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SeatsScalarFieldEnum | Prisma.SeatsScalarFieldEnum[]
+}
+
+/**
+ * Screens.Showtime
+ */
+export type Screens$ShowtimeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Showtime
+   */
+  select?: Prisma.ShowtimeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Showtime
+   */
+  omit?: Prisma.ShowtimeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShowtimeInclude<ExtArgs> | null
+  where?: Prisma.ShowtimeWhereInput
+  orderBy?: Prisma.ShowtimeOrderByWithRelationInput | Prisma.ShowtimeOrderByWithRelationInput[]
+  cursor?: Prisma.ShowtimeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShowtimeScalarFieldEnum | Prisma.ShowtimeScalarFieldEnum[]
 }
 
 /**
