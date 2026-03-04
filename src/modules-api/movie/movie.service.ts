@@ -31,16 +31,17 @@ export class MovieService {
   }
 
   async removeMovieBanner(bannerId: number) {
-    const isBanner = await this.prisma.banners.update({
+    const isBanner = await this.prisma.banners.findUnique({ where: { bannerId, isDeleted: false } })
+    if (!isBanner) throw new NotFoundException("Banner Not Found!")
+    await this.prisma.banners.update({
       where: {
-        bannerId,
-        isDeleted: false
+        bannerId
       },
       data: {
         isDeleted: true
       }
     })
-    if (!isBanner) throw new NotFoundException("Banner Not Found!")
+    
     return true;
   }
 
@@ -87,31 +88,32 @@ export class MovieService {
   }
 
   async updateMovie(movieId: number, updateMovieDto: UpdateMovieDto) {
-    const isMovie = await this.prisma.movies.update({
+    const isMovie = await this.prisma.movies.findUnique({where: {movieId, isDeleted: false}})
+    if (!isMovie) throw new NotFoundException("Movie Not Found")
+    const res = await this.prisma.movies.update({
       where: {
-        movieId,
-        isDeleted: false
+        movieId
       },
       data: {
         ...updateMovieDto,
         dateRelease: updateMovieDto.dateRelease ? new Date(updateMovieDto.dateRelease) : undefined
       }
     })
-    if (!isMovie) throw new NotFoundException("Movie Not Found")
-    return isMovie;
+    
+    return res;
   }
 
   async removeMovie(movieId: number) {
-    const isMovie = await this.prisma.movies.update({
+    const isMovie = await this.prisma.movies.findUnique({where: {movieId, isDeleted: false}})
+    if (!isMovie) throw new NotFoundException("Movie Not Found")
+    await this.prisma.movies.update({
       where: {
-        movieId,
-        isDeleted: false
+        movieId
       },
       data: {
         isDeleted: true
       }
     })
-    if (!isMovie) throw new NotFoundException("Movie Not Found")
     return true;
   }
 

@@ -1,0 +1,665 @@
+{
+  "info": {
+    "_postman_id": "fa79eb8c-f6d5-4949-9a23-ef9f2a74c2f7",
+    "name": "Cinema",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46094730",
+    "_collection_link": "https://go.postman.co/collection/46094730-fa79eb8c-f6d5-4949-9a23-ef9f2a74c2f7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "All Brands",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema/all-brands",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "all-brands"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CinemasByBrandId",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema?brandId=2",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema"
+          ],
+          "query": [
+            {
+              "key": "brandId",
+              "value": "2"
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "type": "text",
+              "disabled": true
+            },
+            {
+              "key": "pageSize",
+              "value": "1",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ShowtimeByBrand",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/showtimeByBrand?brandId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "showtimeByBrand"
+          ],
+          "query": [
+            {
+              "key": "brandId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ShowtimeByCinema",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/showtimeByCinema?cinemaId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "showtimeByCinema"
+          ],
+          "query": [
+            {
+              "key": "cinemaId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ShowtimeByMovie",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/ShowtimeByMovie?movieId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "ShowtimeByMovie"
+          ],
+          "query": [
+            {
+              "key": "movieId",
+              "value": "1"
+            },
+            {
+              "key": "fromDate",
+              "value": "2026-02-26",
+              "disabled": true
+            },
+            {
+              "key": "toDate",
+              "value": "2026-02-24",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Seat List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema/seat-list",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "seat-list"
+          ],
+          "query": [
+            {
+              "key": "cinemaId",
+              "value": "1",
+              "disabled": true
+            },
+            {
+              "key": "screenId",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Showtime",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"screenId\": 1,\r\n    \"movieId\": 1,\r\n    \"showTime\": \"2026-02-26 19:00:00\",\r\n    \"bookingPrice\": 100000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/add-showtime",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "add-showtime"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit Showtime",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"bookingPrice\": 100000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/edit-showtime?showtimeId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "edit-showtime"
+          ],
+          "query": [
+            {
+              "key": "showtimeId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Showtime",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema/delete-showtime?showtimeId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "delete-showtime"
+          ],
+          "query": [
+            {
+              "key": "showtimeId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Cinema",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"cinemaName\": \"CGV Hoàng Hoa Thám\",\r\n    \"cinemaAddress\": \"Hoàng Hoa Thám, HCM\",\r\n    \"brandId\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/add-cinema",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "add-cinema"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cinema Detail",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema/detail?cinemaId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "detail"
+          ],
+          "query": [
+            {
+              "key": "cinemaId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit Cinema",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"cinemaAddress\": \"72 Lê Thánh Tôn, HCM\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/edit-cinema?cinemaId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "edit-cinema"
+          ],
+          "query": [
+            {
+              "key": "cinemaId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Cinema",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"cinemaAddress\": \"72 Lê Thánh Tôn, HCM\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/delete-cinema?cinemaId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "delete-cinema"
+          ],
+          "query": [
+            {
+              "key": "cinemaId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Screen",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"screenName\": \"Rạp A2\",\r\n    \"cinemaId\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/add-screen",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "add-screen"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Screen",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"screenName\": \"Rap A1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/edit-screen?screenId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "edit-screen"
+          ],
+          "query": [
+            {
+              "key": "screenId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Screen",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema/delete-screen?screenId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "delete-screen"
+          ],
+          "query": [
+            {
+              "key": "screenId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Seat",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"seatName\": \"G01\",\r\n    \"seatType\": \"Standard\",\r\n    \"screenId\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/cinema/add-seat",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "add-seat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Seat",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/cinema/delete-seat?seatId=55",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "cinema",
+            "delete-seat"
+          ],
+          "query": [
+            {
+              "key": "seatId",
+              "value": "55"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

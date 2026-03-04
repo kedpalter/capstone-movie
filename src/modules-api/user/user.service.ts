@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { queryPrisma } from 'src/common/helpers/queryPrisma.helper';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { queryPrisma } from 'src/common/helpers/queryPrisma.helper';
 
 @Injectable()
 export class UserService {
@@ -30,28 +30,32 @@ export class UserService {
   }
 
   async updateProfile(userId: number, updateProfileDto: UpdateProfileDto) {
-    console.log({ userId, updateProfileDto })
-    if (updateProfileDto.userEmail) throw new BadRequestException("Bad Request!")
+    if (updateProfileDto.userEmail) throw new BadRequestException("Can't change email!")
     return await this.prisma.users.update({
       where: { userId },
       data: {
         ...updateProfileDto,
         userEmail: undefined
+      },
+      select: {
+        userId: true,
+        userFullname: true,
+        userEmail: true,
+        userPhone: true,
+        userType: true
       }
     })
   }
 
   async deleteAccount(userId: number) {
-    const isUser = await this.prisma.users.update({
+    await this.prisma.users.update({
       where: {
-        userId,
-        isDeleted: false
+        userId
       },
       data: {
         isDeleted: true
       }
     })
-    if (!isUser) throw new BadRequestException("Delete Failed!")
     return true;
   }
 

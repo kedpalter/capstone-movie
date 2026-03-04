@@ -84,6 +84,7 @@ export class CinemaService {
   }
 
   async getShowtimeByCinema(cinemaId: number) {
+    if (!cinemaId) throw new BadRequestException("cinemaId is required")
     const isCinema = await this.prisma.cinemas.findUnique({
       where: {
         cinemaId,
@@ -103,22 +104,32 @@ export class CinemaService {
       }
     })
     if (!isCinema) throw new NotFoundException("Cinema Not Found!")
+
     return isCinema
   }
 
-  async getShowtimeByMovie(movieId: number) {
+  async getShowtimeByMovie(movieId: number, fromDate?: string, toDate?: string) {
+    if (!movieId) throw new BadRequestException('movieId is required!')
+
     const isMovie = await this.prisma.movies.findUnique({
-      where: {
-        movieId,
-        isDeleted: false
-      },
+      where: { movieId, isDeleted: false },
       select: {
         movieId: true,
         movieName: true,
-        Showtime: true
+        movieImage: true,
+        Showtime: {
+          where: {
+            showTime: {
+              gte: fromDate ? new Date(fromDate as string) : undefined,
+              lte: toDate ? new Date(toDate as string) : undefined
+            }
+          }
+        }
       }
     })
+
     if (!isMovie) throw new NotFoundException('Movie Not Found!')
+
     return isMovie
   }
 
@@ -158,24 +169,27 @@ export class CinemaService {
   }
 
   async updateShowtime(showtimeId: number, updateShowtimeDto: UpdateShowtimeDto) {
-    const isShowtime = await this.prisma.showtime.update({
-      where: { showId: showtimeId, isDeleted: false },
+    if (!showtimeId) throw new BadRequestException("showtimeId is required")
+    const isShowtime = await this.prisma.showtime.findUnique({ where: { showId: showtimeId, isDeleted: false } })
+    if (!isShowtime) throw new NotFoundException('Show Not Found!')
+    const res = await this.prisma.showtime.update({
+      where: { showId: showtimeId },
       data: {
         ...updateShowtimeDto,
         showTime: updateShowtimeDto.showTime ? new Date(updateShowtimeDto.showTime) : undefined
       }
     })
-    if (!isShowtime) throw new NotFoundException("Showtime Not Found!")
-    return isShowtime
+    return res
   }
 
   async deleteShowtime(showtimeId: number) {
-    const isShowtime = await this.prisma.showtime.update({
+    const isShowtime = await this.prisma.showtime.findUnique({ where: { showId: showtimeId, isDeleted: false } })
+    if (!isShowtime) throw new NotFoundException('Show Not Found!')
+    const res = await this.prisma.showtime.update({
       where: { showId: showtimeId, isDeleted: false },
       data: { isDeleted: true }
     })
-    if (!isShowtime) throw new NotFoundException("Showtime Not Found!")
-    return isShowtime
+    return res
   }
 
   async addCinema(createCinemaDto: CreateCinemaDto) {
@@ -188,6 +202,7 @@ export class CinemaService {
     const res = await this.prisma.cinemas.findUnique({
       where: {
         cinemaId,
+        isDeleted: false
       },
       include: {
         Screens: true
@@ -198,8 +213,9 @@ export class CinemaService {
   }
 
   async updateCinema(cinemaId: number, updateCinemaDto: UpdateCinemaDto) {
-    const isExist = await this.isExist.checkExist("cinemas", { cinemaId })
-    if (!isExist) throw new BadRequestException("Updating Failed!")
+    if (!cinemaId) throw new BadRequestException("cinemaId is required")
+    const isExist = await this.prisma.cinemas.findUnique({ where: { cinemaId, isDeleted: false } })
+    if (!isExist) throw new NotFoundException("Cinema Not Found!")
 
     return await this.prisma.cinemas.update({
       where: {
@@ -210,7 +226,10 @@ export class CinemaService {
   }
 
   async deleteCinema(cinemaId: number) {
-    const isCinema = await this.prisma.cinemas.update({
+    if (!cinemaId) throw new BadRequestException("cinemaId is required")
+    const isCinema = await this.prisma.cinemas.findUnique({ where: { cinemaId: cinemaId, isDeleted: false } })
+    if (!isCinema) throw new NotFoundException('Cinema Not Found!')
+    await this.prisma.cinemas.update({
       where: {
         cinemaId,
         isDeleted: false
@@ -219,35 +238,39 @@ export class CinemaService {
         isDeleted: true
       }
     })
-    if (!isCinema) throw new NotFoundException("Cinema Not Found!")
     return true
   }
 
   async addScreen(createSceenDto: CreateScreenDto) {
-    const isCinema = await this.isExist.checkExist("cinemas", { cinemaId: createSceenDto.cinemaId })
-    if (!isCinema) throw new BadRequestException("Bad Request!")
+    const isCinema = await this.prisma.cinemas.findUnique({ where: { cinemaId: createSceenDto.cinemaId } })
+    if (!isCinema) throw new BadRequestException("Cinema Invalid!")
     return await this.prisma.screens.create({
       data: createSceenDto
     })
   }
 
   async updateScreen(screenId: number, updateScreenDto: UpdateScreenDto) {
-    const isScreen = await this.prisma.screens.update({
-      where: { screenId, isDeleted: false },
+    if (!screenId) throw new BadRequestException("screenId is required")
+    const isScreen = await this.prisma.screens.findUnique({ where: { screenId, isDeleted: false } })
+    if (!isScreen) throw new NotFoundException('Screen Not Found!')
+    const res = await this.prisma.screens.update({
+      where: { screenId },
       data: updateScreenDto
     })
-    if (!isScreen) throw new NotFoundException("Screen Not Found")
-    return isScreen
+
+    return res
   }
 
   async deleteScreen(screenId: number) {
-    const isScreen = await this.prisma.screens.update({
-      where: { screenId, isDeleted: false },
+    if (!screenId) throw new BadRequestException("screenId is required")
+    const isScreen = await this.prisma.screens.findUnique({ where: { screenId, isDeleted: false } })
+    if (!isScreen) throw new NotFoundException('Screen Not Found!')
+    await this.prisma.screens.update({
+      where: { screenId },
       data: {
         isDeleted: true
       }
     })
-    if (!isScreen) throw new NotFoundException("Screen Not Found")
     return true
   }
 
@@ -261,11 +284,13 @@ export class CinemaService {
   }
 
   async deleteSeat(seatId: number) {
-    const isSeat = await this.prisma.seats.update({
+    if (!seatId) throw new BadRequestException("seatId is required")
+    const isSeat = await this.prisma.seats.findUnique({ where: { seatId, isDeleted: false } })
+    if (!isSeat) throw new NotFoundException('Seat Not Found!')
+    await this.prisma.seats.update({
       where: { seatId, isDeleted: false },
       data: { isDeleted: true }
     })
-    if (!isSeat) throw new NotFoundException("Seat Not Found!")
     return true
   }
 

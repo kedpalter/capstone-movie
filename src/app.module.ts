@@ -13,6 +13,7 @@ import { CheckExistModule } from './modules-system/checkExist/checkExist.module'
 import { ProtectGuard } from './common/guards/protect.guard';
 import { RoleGuard } from './common/guards/role.guard';
 import { TokenModule } from './modules-system/token/token.module';
+import { ElasticSearch } from './modules-system/elastic-search/elastic-search.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { TokenModule } from './modules-system/token/token.module';
     CinemaModule,
     UserModule,
     BookingModule,
-    AuthModule
+    AuthModule,
+    ElasticSearch
   ],
   controllers: [AppController],
   providers: [

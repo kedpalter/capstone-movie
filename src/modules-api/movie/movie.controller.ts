@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query, UseGuards, UploadedFile } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
@@ -24,7 +24,7 @@ export class MovieController {
   @Role('admin')
   addMovieBanner(
     @Body()
-    createBannerDto: CreateBannerDto
+    createBannerDto: CreateBannerDto,
   ) {
     return this.movieService.addMovieBanner(createBannerDto)
   }

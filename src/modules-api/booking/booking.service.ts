@@ -10,6 +10,7 @@ export class BookingService {
   ) { }
 
   async getAvailSeats(showtimeId: number) {
+    if (!showtimeId) throw new BadRequestException("showtimeId required!")
     const isShowtime = await this.prisma.showtime.findUnique({
       where: { showId: showtimeId },
       select: {

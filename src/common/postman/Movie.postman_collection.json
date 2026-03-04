@@ -1,0 +1,292 @@
+{
+  "info": {
+    "_postman_id": "cb566f82-9a91-4f8e-8dba-81e60c87e3a4",
+    "name": "Movie",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46094730",
+    "_collection_link": "https://go.postman.co/collection/46094730-cb566f82-9a91-4f8e-8dba-81e60c87e3a4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "All Banners",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/movie/banners",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "banners"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Banner",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"movieId\": 1,\r\n    \"bannerImage\": \"mockBanner2.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/movie/add-banner",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "add-banner"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Banner",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/movie/delete-banner?bannerId=3",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "delete-banner"
+          ],
+          "query": [
+            {
+              "key": "bannerId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All Movies",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/movie/all-movies",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "all-movies"
+          ],
+          "query": [
+            {
+              "key": "isShowing",
+              "value": "true",
+              "disabled": true
+            },
+            {
+              "key": "isUpcoming",
+              "value": "false",
+              "disabled": true
+            },
+            {
+              "key": "isTrending",
+              "value": "false",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "type": "text",
+              "disabled": true
+            },
+            {
+              "key": "pageSize",
+              "value": "1",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Movie Detail",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/movie/1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Movie",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"movieName\": \"Titanic\",\r\n    \"movieTrailer\": \"https://youtube.com\",\r\n    \"movieImage\": \"https://google.com\",\r\n    \"movieDescription\": \"Oscar Film\",\r\n    \"dateRelease\": \"1997-01-01 00:00:00\",\r\n    \"movieRating\": 10,\r\n    \"isTrending\": false,\r\n    \"isShowing\": true,\r\n    \"isUpcoming\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/movie/add-movie",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "add-movie"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Movie",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"movieDescription\": \"Best Film\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/movie/edit-movie?movieId=3",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "edit-movie"
+          ],
+          "query": [
+            {
+              "key": "movieId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Movie",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/movie/delete-movie?movieId=3",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "movie",
+            "delete-movie"
+          ],
+          "query": [
+            {
+              "key": "movieId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

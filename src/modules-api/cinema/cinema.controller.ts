@@ -65,9 +65,16 @@ export class CinemaController {
   @Public()
   getShowtimeByMovie(
     @Query('movieId')
-    movieId: string
+    movieId: string,
+    @Query('fromDate')
+    fromDate?: string,
+    @Query('toDate')
+    toDate?: string,
   ) {
-    return this.cinemaService.getShowtimeByMovie(+movieId)
+    return this.cinemaService.getShowtimeByMovie(+movieId,
+      fromDate ? fromDate : undefined,
+      toDate ? toDate : undefined,
+    )
   }
 
   // 6. GET Seat list
@@ -127,17 +134,17 @@ export class CinemaController {
   }
 
   // 11. GET Cinema detail
-  @Get(':id')
+  @Get('detail')
   @Public()
-  findCinemaDetail(@Param('id') cinemaId: string) {
+  findCinemaDetail(@Query('cinemaId') cinemaId: string) {
     return this.cinemaService.findCinemaDetail(+cinemaId)
   }
 
   // 12. PUT Edit Cinema
-  @Put(':id')
+  @Put('edit-cinema')
   @Role('admin')
   updateCinema(
-    @Param('id')
+    @Query('cinemaId')
     id: string,
     @Body()
     updateCinemaDto: UpdateCinemaDto

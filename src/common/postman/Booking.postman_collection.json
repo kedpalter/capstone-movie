@@ -1,0 +1,90 @@
+{
+  "info": {
+    "_postman_id": "1bff6e92-07df-4da4-96ec-fc13a31dcafc",
+    "name": "Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46094730",
+    "_collection_link": "https://go.postman.co/collection/46094730-1bff6e92-07df-4da4-96ec-fc13a31dcafc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Avail Seats",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/booking/avail-seats?showtimeId=1",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "booking",
+            "avail-seats"
+          ],
+          "query": [
+            {
+              "key": "showtimeId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Booking Movie",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"showId\": 1,\r\n    \"seatId\": [8, 9]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/booking/buy-tickets",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "booking",
+            "buy-tickets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "My tickets",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
