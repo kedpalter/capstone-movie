@@ -56,3 +56,7 @@
 - POST   /user/add-new             → Thêm người dùng mới (admin)
 - PUT    /user/set-role            → Phân quyền cho người dùng (admin)
 
+## Booking
+- GET    /booking/avail-seats         → Kiểm tra ghế trống
+- POST   /booking/buy-tickets         → Đặt vé
+- GET    /booking/my-tickets          → Lấy danh sách vé đã đặt

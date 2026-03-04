@@ -36,6 +36,7 @@ export class CinemaService {
         brandName: true,
         brandLogo: true,
         Cinemas: {
+          where: { isDeleted: false },
           skip: index,
           take: pageSizePagi
         }
