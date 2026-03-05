@@ -1,9 +1,9 @@
 import { IsInt, IsString } from "class-validator";
 
 export class CreateBannerDto {
-    @IsInt()
+    // @IsInt()
     movieId: number;
 
-    @IsString()
+    // @IsString()
     bannerImage: string
 }

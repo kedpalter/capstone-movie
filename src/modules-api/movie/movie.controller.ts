@@ -1,12 +1,13 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UseGuards, UploadedFile } from '@nestjs/common';
-import { MovieService } from './movie.service';
-import { CreateMovieDto } from './dto/create-movie.dto';
-import { UpdateMovieDto } from './dto/update-movie.dto';
-import { CreateBannerDto } from './dto/add-banner.dto';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Public } from 'src/common/decorators/public.decorator';
 import { Role } from 'src/common/decorators/roles.decorator';
 import { ProtectGuard } from 'src/common/guards/protect.guard';
 import { RoleGuard } from 'src/common/guards/role.guard';
+import { CreateBannerDto } from './dto/add-banner.dto';
+import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
+import { MovieService } from './movie.service';
 
 @UseGuards(ProtectGuard, RoleGuard)
 @Controller('movie')
@@ -21,12 +22,15 @@ export class MovieController {
 
   // 2. POST Add Banner
   @Post('add-banner')
+  @UseInterceptors(FileInterceptor('banner'))
   @Role('admin')
   addMovieBanner(
+    @UploadedFile()
+    banner: Express.Multer.File,
     @Body()
     createBannerDto: CreateBannerDto,
   ) {
-    return this.movieService.addMovieBanner(createBannerDto)
+    return this.movieService.addMovieBanner(banner, createBannerDto)
   }
 
   // 3. DELETE Banner
