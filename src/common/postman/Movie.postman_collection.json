@@ -51,13 +51,21 @@
         "method": "POST",
         "header": [],
         "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"movieId\": 1,\r\n    \"bannerImage\": \"mockBanner2.jpg\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "banner",
+              "type": "file",
+              "uuid": "44c81dc2-d30e-46b3-9265-d28bf765fc17",
+              "src": "/C:/Kepler_Total/1.Total/Pics/pirate.jpg"
+            },
+            {
+              "key": "movieId",
+              "value": "1",
+              "type": "text",
+              "uuid": "c3c73d08-11bd-4ff9-b73b-7a71005465a3"
             }
-          }
+          ]
         },
         "url": {
           "raw": "{{domain}}/movie/add-banner",

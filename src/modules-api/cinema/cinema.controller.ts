@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Delete, Query, UseGuards } from '@nestjs/common';
+import { ApiQuery } from '@nestjs/swagger';
 import { Role } from 'src/common/decorators/roles.decorator';
 import { ProtectGuard } from 'src/common/guards/protect.guard';
 import { RoleGuard } from 'src/common/guards/role.guard';
@@ -62,6 +63,8 @@ export class CinemaController {
 
   // 5. GET Showtime By Movie
   @Get('showtimeByMovie')
+  @ApiQuery({name: 'fromDate', required: false})
+  @ApiQuery({name: 'toDate', required: false})
   @Public()
   getShowtimeByMovie(
     @Query('movieId')
