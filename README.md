@@ -7,6 +7,13 @@
   DATABASE_URL,
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
+  CLOUDINARY_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
+
+- Link Swagger: **localhost:3053/api**
+- Trường hợp tất cả các API đều bị lỗi 500 từ lần chạy thứ 2,
+  hãy chạy lại: **npx prisma db pull** & **npx prisma generate**
 
 
 ## APIs

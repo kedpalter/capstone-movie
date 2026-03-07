@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { ApiQuery } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Public } from 'src/common/decorators/public.decorator';
 import { Role } from 'src/common/decorators/roles.decorator';
@@ -45,6 +46,11 @@ export class MovieController {
 
   // 4. GET Movies
   @Get("all-movies")
+  @ApiQuery({name: 'isShowing', required: false})
+  @ApiQuery({name: 'isUpcoming', required: false})
+  @ApiQuery({name: 'isTrending', required: false})
+  @ApiQuery({name: 'page', required: false})
+  @ApiQuery({name: 'pageSize', required: false})
   @Public()
   findAllMovies(
     @Query('isShowing')

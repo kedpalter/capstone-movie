@@ -82,6 +82,8 @@ export class CinemaController {
 
   // 6. GET Seat list
   @Get('seat-list')
+  @ApiQuery({name: 'cinemaId', required: false})
+  @ApiQuery({name: 'screenId', required: false})
   @Public()
   getSeats(
     @Query('cinemaId')
